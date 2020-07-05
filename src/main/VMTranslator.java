@@ -1,6 +1,8 @@
 import loadfile.*;
 import java.io.File;
 
+import commandlib.*;
+
 class VMAssembler {
 
 	public static void main(String[] args) {
@@ -8,6 +10,7 @@ class VMAssembler {
 		LoadFile file = new LoadFile("SimpleAdd.vm", "vm");
 		File sourceFile = file.getFile();
 
-		// FilePass.main(sourceFile);
+		CommandLib commandLib = new CommandLib();
+
 	}
 }
