@@ -27,6 +27,7 @@ ________________________________________________________________________________
 */
 
 import java.util.Map;
+import java.util.Arrays;
 import java.util.HashMap;
 
 import commandlib.command.*;
@@ -44,5 +45,17 @@ public class CommandLib {
     commands.put("push", new Command("push", new String[] { "LOCATION", "VALUE" }));
 
     commands.put("add", new Command("add"));
+  }
+
+  public String write(String input) {
+    String[] args = input.split(" ");
+
+    String commandType = args[0];
+    Command command = commands.get(commandType);
+
+    String[] vars = Arrays.copyOfRange(args, 1, args.length);
+
+    return command.write(vars);
+
   }
 }

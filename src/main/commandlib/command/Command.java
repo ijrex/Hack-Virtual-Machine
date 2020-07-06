@@ -33,9 +33,7 @@ public class Command {
 
       while (scanner.hasNextLine()) {
         String line = scanner.nextLine();
-        output += line;
-        if (scanner.hasNextLine())
-          output += "\n";
+        output += line + "\n";
       }
       scanner.close();
     } catch (IOException e) {
