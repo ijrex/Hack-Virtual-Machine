@@ -45,6 +45,7 @@ public class CommandLib {
     commands.put("push", new Command("push", new String[] { "LOCATION", "VALUE" }));
 
     commands.put("add", new Command("add"));
+    commands.put("eq", new Command("eq"));
   }
 
   public String write(String input) {
