@@ -17,13 +17,18 @@ public class ReadWrite {
       String outputFile = Util.getOutputFilePath(sourceFile);
       FileWriter fileWriter = new FileWriter(outputFile, false);
 
+      fileWriter.write(commandLib.write("init", 0)); // INIT ARITHMETIC
+
+      int linePos = 16;
+
       while (fileScanner.hasNextLine()) {
         String line = fileScanner.nextLine();
 
         line = Util.trimExcess(line);
 
         if (line.length() > 0) {
-          fileWriter.write(commandLib.write(line));
+          linePos += commandLib.getLineLength(line);
+          fileWriter.write(commandLib.write(line, linePos));
         }
       }
 

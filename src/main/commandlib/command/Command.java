@@ -6,16 +6,24 @@ import java.io.IOException;
 import java.util.Scanner;
 import java.util.ArrayList;
 
+import commandlib.command.util.*;
+import commandlib.commandtype.*;
+
 public class Command {
+
+  public int lineLength = 0;
+  public CommandType type;
 
   private String output = "";
   private ArrayList<String> vars = new ArrayList<String>();
 
-  public Command(String name) {
+  public Command(CommandType type, String name) {
+    this.type = type;
     this.parseTemplateFile(name);
   }
 
-  public Command(String name, String[] inputVars) {
+  public Command(CommandType type, String name, String[] inputVars) {
+    this.type = type;
     this.parseTemplateFile(name);
 
     for (String var : inputVars) {
@@ -33,7 +41,13 @@ public class Command {
 
       while (scanner.hasNextLine()) {
         String line = scanner.nextLine();
-        output += line + "\n";
+
+        String trimmedLine = Util.trimExcess(line);
+
+        if (trimmedLine.length() > 0) {
+          output += trimmedLine + "\n";
+          lineLength++;
+        }
       }
       scanner.close();
     } catch (IOException e) {
@@ -43,7 +57,14 @@ public class Command {
     }
   }
 
-  public String write(String[] args) {
+  public String write(String[] args, int linePos) {
+
+    String pre = "";
+
+    if (this.type == CommandType.C_ARITHMETIC) {
+      pre += "!! TODO: JUMP TO " + linePos + "\n";
+    }
+
     String parsedOutput = output;
 
     for (int i = 0; i < vars.size(); i++) {
@@ -51,6 +72,6 @@ public class Command {
       parsedOutput = parsedOutput.replaceAll(regex, args[i]);
     }
 
-    return parsedOutput;
+    return pre + parsedOutput;
   }
 }
