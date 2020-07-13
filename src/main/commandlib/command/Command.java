@@ -13,6 +13,7 @@ public class Command {
 
   public int lineLength = 0;
   public CommandType type;
+  public String name;
 
   private String output = "";
   private ArrayList<String> vars = new ArrayList<String>();
@@ -46,7 +47,10 @@ public class Command {
 
         if (trimmedLine.length() > 0) {
           output += trimmedLine + "\n";
-          lineLength++;
+
+          if (!trimmedLine.contains("(")) {
+            lineLength++;
+          }
         }
       }
       scanner.close();
@@ -59,19 +63,15 @@ public class Command {
 
   public String write(String[] args, int linePos) {
 
-    String pre = "";
-
-    if (this.type == CommandType.C_ARITHMETIC) {
-      pre += "!! TODO: JUMP TO " + linePos + "\n";
+    switch (type) {
+      case INIT:
+        return this.output;
+      case C_ARITHMETIC:
+        return Write.arithmetic(name, output, linePos);
+      case C_PUSH:
+        return Write.push(args, vars, output);
+      default:
+        return "TODO: PARSE THIS COMMAND\n";
     }
-
-    String parsedOutput = output;
-
-    for (int i = 0; i < vars.size(); i++) {
-      String regex = "#{3}" + vars.get(i) + "#{3}";
-      parsedOutput = parsedOutput.replaceAll(regex, args[i]);
-    }
-
-    return pre + parsedOutput;
   }
 }

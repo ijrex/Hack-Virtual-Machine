@@ -17,9 +17,7 @@ public class ReadWrite {
       String outputFile = Util.getOutputFilePath(sourceFile);
       FileWriter fileWriter = new FileWriter(outputFile, false);
 
-      fileWriter.write(commandLib.write("init", 0)); // INIT ARITHMETIC
-
-      int linePos = 16;
+      fileWriter.write(commandLib.init()); // INIT ARITHMETIC
 
       while (fileScanner.hasNextLine()) {
         String line = fileScanner.nextLine();
@@ -27,8 +25,7 @@ public class ReadWrite {
         line = Util.trimExcess(line);
 
         if (line.length() > 0) {
-          linePos += commandLib.getLineLength(line);
-          fileWriter.write(commandLib.write(line, linePos));
+          fileWriter.write(commandLib.write(line));
         }
       }
 

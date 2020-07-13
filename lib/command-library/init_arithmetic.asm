@@ -13,5 +13,6 @@ M=D
   A=A-1
   M=M+D
   @R14
+  A=M
   0;JMP
 (PROGRAM_START)

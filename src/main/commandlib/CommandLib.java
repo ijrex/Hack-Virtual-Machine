@@ -36,32 +36,27 @@ import commandlib.commandtype.*;
 public class CommandLib {
 
   private Map<String, Command> commands = new HashMap<String, Command>();
+  private int linePos;
 
   public CommandLib() {
-
+    linePos = 0;
     this.assignCommandDescriptions();
   }
 
   private void assignCommandDescriptions() {
-    // INIT
-    commands.put("init", new Command(CommandType.TODO, "init"));
+    commands.put("init_arithmetic", new Command(CommandType.INIT, "init_arithmetic"));
 
-    // PUSH POP
     commands.put("push", new Command(CommandType.C_PUSH, "push", new String[] { "LOCATION", "VALUE" }));
 
-    // ARITHMETIC
     commands.put("add", new Command(CommandType.C_ARITHMETIC, "add"));
-    // commands.put("sub", new Command("sub"));
-    // commands.put("neg", new Command("neg"));
-    // commands.put("eq", new Command("eq"));
-    // commands.put("gt", new Command("gt"));
-    // commands.put("lt", new Command("lt"));
-    // commands.put("and", new Command("and"));
-    // commands.put("or", new Command("or"));
-    // commands.put("not", new Command("not"));
   }
 
-  public String write(String input, int linePos) {
+  public String init() {
+    linePos += commands.get("init_arithmetic").lineLength;
+    return commands.get("init_arithmetic").write(null, linePos);
+  }
+
+  public String write(String input) {
     String[] args = input.split(" ");
 
     String commandType = args[0];
@@ -69,14 +64,7 @@ public class CommandLib {
 
     String[] vars = Arrays.copyOfRange(args, 1, args.length);
 
+    linePos += command.lineLength;
     return command.write(vars, linePos);
-  }
-
-  public int getLineLength(String input) {
-    String[] args = input.split(" ");
-
-    String commandType = args[0];
-    Command command = commands.get(commandType);
-    return command.lineLength;
   }
 }

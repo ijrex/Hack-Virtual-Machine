@@ -11,6 +11,7 @@ D=M
 A=A-1
 M=M+D
 @R14
+A=M
 0;JMP
 (PROGRAM_START)
 @7
@@ -25,9 +26,9 @@ D=A
 AM=M+1
 A=A-1
 M=D
-!! TODO: JUMP TO 33
+@33
 D=A
 @R14
-M=A
+M=D
 @arithmetic_add
 0;JMP
