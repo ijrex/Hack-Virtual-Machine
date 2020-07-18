@@ -18,23 +18,27 @@ public class Command {
   private String output = "";
   private ArrayList<String> vars = new ArrayList<String>();
 
-  public Command(CommandType type, String name) {
-    this.type = type;
-    this.parseTemplateFile(name);
+  public Command(CommandType type, String name, String templateFile) {
+    this.init(type, name, templateFile);
   }
 
-  public Command(CommandType type, String name, String[] inputVars) {
-    this.type = type;
-    this.parseTemplateFile(name);
+  public Command(CommandType type, String name, String templateFile, String[] inputVars) {
+    this.init(type, name, templateFile);
 
     for (String var : inputVars) {
       vars.add(var);
     }
   }
 
-  private void parseTemplateFile(String name) {
+  private void init(CommandType type, String name, String templateFile) {
+    this.type = type;
+    this.name = name;
+    this.parseTemplateFile(templateFile);
+  }
+
+  private void parseTemplateFile(String templateFile) {
     String[] types = { "asm", "xasm" };
-    LoadFile file = new LoadFile(name, types, "../../lib/command-library");
+    LoadFile file = new LoadFile(templateFile, types, "../../lib/command-library");
     File template = file.getFile();
 
     try {
@@ -64,14 +68,12 @@ public class Command {
   public String write(String[] args, int linePos) {
 
     switch (type) {
-      case INIT:
+      case LIB:
         return this.output;
       case C_ARITHMETIC:
-        return Write.arithmetic(name, output, linePos);
-      case C_PUSH:
-        return Write.push(args, vars, output);
+        return Write.arithmetic(name, linePos, output);
       default:
-        return "TODO: PARSE THIS COMMAND\n";
+        return Write.standard(args, vars, output);
     }
   }
 }

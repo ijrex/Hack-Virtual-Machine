@@ -39,16 +39,16 @@ public class CommandLib {
   private int linePos;
 
   public CommandLib() {
-    linePos = 0;
+    linePos = -1;
     this.assignCommandDescriptions();
   }
 
   private void assignCommandDescriptions() {
-    commands.put("init_arithmetic", new Command(CommandType.INIT, "init_arithmetic"));
+    commands.put("init_arithmetic", new Command(CommandType.LIB, null, "arithmetic_lib.asm"));
 
-    commands.put("push", new Command(CommandType.C_PUSH, "push", new String[] { "LOCATION", "VALUE" }));
+    commands.put("push", new Command(CommandType.C_PUSH, null, "push.asm", new String[] { "LOCATION", "VALUE" }));
 
-    commands.put("add", new Command(CommandType.C_ARITHMETIC, "add"));
+    commands.put("add", new Command(CommandType.C_ARITHMETIC, "add", "arithmetic.asm"));
   }
 
   public String init() {
