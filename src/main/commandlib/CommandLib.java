@@ -31,21 +31,29 @@ import java.util.Arrays;
 import java.util.HashMap;
 
 import commandlib.command.*;
+import commandlib.commandtype.*;
 
 public class CommandLib {
 
   private Map<String, Command> commands = new HashMap<String, Command>();
+  private int linePos;
 
   public CommandLib() {
-
+    linePos = -1;
     this.assignCommandDescriptions();
   }
 
   private void assignCommandDescriptions() {
-    commands.put("push", new Command("push", new String[] { "LOCATION", "VALUE" }));
+    commands.put("init_arithmetic", new Command(CommandType.LIB, null, "arithmetic_lib.asm"));
 
-    commands.put("add", new Command("add"));
-    commands.put("eq", new Command("eq"));
+    commands.put("push", new Command(CommandType.C_PUSH, null, "push.asm", new String[] { "LOCATION", "VALUE" }));
+
+    commands.put("add", new Command(CommandType.C_ARITHMETIC, "add", "arithmetic.asm"));
+  }
+
+  public String init() {
+    linePos += commands.get("init_arithmetic").lineLength;
+    return commands.get("init_arithmetic").write(null, linePos);
   }
 
   public String write(String input) {
@@ -56,7 +64,7 @@ public class CommandLib {
 
     String[] vars = Arrays.copyOfRange(args, 1, args.length);
 
-    return command.write(vars);
-
+    linePos += command.lineLength;
+    return command.write(vars, linePos);
   }
 }

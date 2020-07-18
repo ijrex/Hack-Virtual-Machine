@@ -1,4 +1,4 @@
-@###VALUE###
+@$V$_VALUE_$V$
 D=A
 @SP
 AM=M+1
