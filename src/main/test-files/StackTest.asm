@@ -95,8 +95,6 @@ AM=M-1
 D=M
 A=A-1
 M=M-D
-@ARITHMETIC_LIB_END
-0;JMP
 (ARITHMETIC_LIB_END)
 @R14
 A=M
@@ -114,7 +112,7 @@ D=A
 AM=M+1
 A=A-1
 M=D
-@106
+@104
 D=A
 @R14
 M=D
@@ -132,7 +130,7 @@ D=A
 AM=M+1
 A=A-1
 M=D
-@124
+@122
 D=A
 @R14
 M=D
@@ -150,7 +148,7 @@ D=A
 AM=M+1
 A=A-1
 M=D
-@142
+@140
 D=A
 @R14
 M=D
@@ -168,7 +166,7 @@ D=A
 AM=M+1
 A=A-1
 M=D
-@160
+@158
 D=A
 @R14
 M=D
@@ -186,7 +184,7 @@ D=A
 AM=M+1
 A=A-1
 M=D
-@178
+@176
 D=A
 @R14
 M=D
@@ -204,7 +202,7 @@ D=A
 AM=M+1
 A=A-1
 M=D
-@196
+@194
 D=A
 @R14
 M=D
@@ -222,7 +220,7 @@ D=A
 AM=M+1
 A=A-1
 M=D
-@214
+@212
 D=A
 @R14
 M=D
@@ -240,7 +238,7 @@ D=A
 AM=M+1
 A=A-1
 M=D
-@232
+@230
 D=A
 @R14
 M=D
@@ -258,7 +256,7 @@ D=A
 AM=M+1
 A=A-1
 M=D
-@250
+@248
 D=A
 @R14
 M=D
@@ -282,7 +280,7 @@ D=A
 AM=M+1
 A=A-1
 M=D
-@274
+@272
 D=A
 @R14
 M=D
@@ -294,19 +292,19 @@ D=A
 AM=M+1
 A=A-1
 M=D
-@286
+@284
 D=A
 @R14
 M=D
 @ARITHMETIC_SUB
 0;JMP
-@292
+@290
 D=A
 @R14
 M=D
 @ARITHMETIC_NEG
 0;JMP
-@298
+@296
 D=A
 @R14
 M=D
@@ -318,13 +316,13 @@ D=A
 AM=M+1
 A=A-1
 M=D
-@310
+@308
 D=A
 @R14
 M=D
 @ARITHMETIC_OR
 0;JMP
-@316
+@314
 D=A
 @R14
 M=D
