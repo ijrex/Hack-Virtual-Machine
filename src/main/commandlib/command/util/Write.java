@@ -13,7 +13,7 @@ public class Write {
     parsedOutput = parseCommands(linePos, output);
 
     String regex = "\\$_ARITHMETIC_LIB_\\$";
-    parsedOutput = parsedOutput.replaceAll(regex, "arithmetic_" + name);
+    parsedOutput = parsedOutput.replaceAll(regex, "ARITHMETIC_" + name.toUpperCase());
 
     return parsedOutput;
   }

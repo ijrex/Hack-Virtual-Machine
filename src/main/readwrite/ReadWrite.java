@@ -17,7 +17,7 @@ public class ReadWrite {
       String outputFile = Util.getOutputFilePath(sourceFile);
       FileWriter fileWriter = new FileWriter(outputFile, false);
 
-      fileWriter.write(commandLib.init()); // INIT ARITHMETIC
+      fileWriter.write(commandLib.init());
 
       while (fileScanner.hasNextLine()) {
         String line = fileScanner.nextLine();

@@ -49,6 +49,14 @@ public class CommandLib {
     commands.put("push", new Command(CommandType.C_PUSH, null, "push.asm", new String[] { "LOCATION", "VALUE" }));
 
     commands.put("add", new Command(CommandType.C_ARITHMETIC, "add", "arithmetic.asm"));
+    commands.put("and", new Command(CommandType.C_ARITHMETIC, "and", "arithmetic.asm"));
+    commands.put("eq", new Command(CommandType.C_ARITHMETIC, "eq", "arithmetic.asm"));
+    commands.put("gt", new Command(CommandType.C_ARITHMETIC, "gt", "arithmetic.asm"));
+    commands.put("lt", new Command(CommandType.C_ARITHMETIC, "lt", "arithmetic.asm"));
+    commands.put("neg", new Command(CommandType.C_ARITHMETIC, "neg", "arithmetic.asm"));
+    commands.put("not", new Command(CommandType.C_ARITHMETIC, "not", "arithmetic.asm"));
+    commands.put("or", new Command(CommandType.C_ARITHMETIC, "or", "arithmetic.asm"));
+    commands.put("sub", new Command(CommandType.C_ARITHMETIC, "sub", "arithmetic.asm"));
   }
 
   public String init() {
