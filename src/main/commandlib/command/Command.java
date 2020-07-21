@@ -4,36 +4,32 @@ import loadfile.LoadFile;
 import java.io.File;
 import java.io.IOException;
 import java.util.Scanner;
+
 import java.util.ArrayList;
 
 import commandlib.command.util.*;
-import commandlib.commandtype.*;
 
 public class Command {
+  protected int blockHeight = 0;
+  protected String output = "";
+  protected ArrayList<String> vars = new ArrayList<String>();
 
-  public int lineLength = 0;
-  public CommandType type;
-  public String name;
-
-  private String output = "";
-  private ArrayList<String> vars = new ArrayList<String>();
-
-  public Command(CommandType type, String name, String templateFile) {
-    this.init(type, name, templateFile);
+  public Command(String templateFile, String name) {
+    parseTemplateFile(templateFile);
   }
 
-  public Command(CommandType type, String name, String templateFile, String[] inputVars) {
-    this.init(type, name, templateFile);
-
-    for (String var : inputVars) {
-      vars.add(var);
+  public Command(String[] templateFiles, String name) {
+    for (String templateFile : templateFiles) {
+      parseTemplateFile(templateFile);
     }
   }
 
-  private void init(CommandType type, String name, String templateFile) {
-    this.type = type;
-    this.name = name;
-    this.parseTemplateFile(templateFile);
+  public String write(String[] args, int linePos) {
+    return output;
+  }
+
+  public int getBlockHeight() {
+    return this.blockHeight;
   }
 
   private void parseTemplateFile(String templateFile) {
@@ -53,7 +49,7 @@ public class Command {
           output += trimmedLine + "\n";
 
           if (!trimmedLine.contains("(")) {
-            lineLength++;
+            blockHeight++;
           }
         }
       }
@@ -62,18 +58,6 @@ public class Command {
       System.out.println("ERROR: An error occured while parsing + " + template.getName());
       e.printStackTrace();
       System.exit(1);
-    }
-  }
-
-  public String write(String[] args, int linePos) {
-
-    switch (type) {
-      case LIB:
-        return this.output;
-      case C_ARITHMETIC:
-        return Write.arithmetic(name, linePos, output);
-      default:
-        return Write.standard(args, vars, output);
     }
   }
 }

@@ -1,330 +1,330 @@
-@PROGRAM_START
-0;JMP
-(ARITHMETIC_ADD)
-@SP
-AM=M-1
-D=M
-A=A-1
-M=M+D
-@ARITHMETIC_LIB_END
-0;JMP
-(ARITHMETIC_AND)
-@SP
-AM=M-1
-D=M
-A=A-1
-M=M&D
-@ARITHMETIC_LIB_END
-0;JMP
-(ARITHMETIC_EQ)
-@SP
-AM=M-1
-D=M
-A=A-1
-D=M-D
-@ARITHMETIC_IS_EQUAL
-D;JEQ
-D=-1
-(ARITHMETIC_IS_EQUAL)
-@SP
-A=M-1
-M=!D
-@ARITHMETIC_LIB_END
-0;JMP
-(ARITHMETIC_GT)
-@SP
-AM=M-1
-D=M
-A=A-1
-D=M-D
-@ARITHMETIC_IS_GT
-D;JGT
-D=0
-@ARITHMETIC_GT_RESOLVE
-0;JMP
-(ARITHMETIC_IS_GT)
-D=-1
-(ARITHMETIC_GT_RESOLVE)
-@SP
-A=M-1
-M=D
-@ARITHMETIC_LIB_END
-0;JMP
-(ARITHMETIC_LT)
-@SP
-AM=M-1
-D=M
-A=A-1
-D=M-D
-@ARITHMETIC_IS_LT
-D;JLT
-D=0
-@ARITHMETIC_LT_RESOLVE
-0;JMP
-(ARITHMETIC_IS_LT)
-D=-1
-(ARITHMETIC_LT_RESOLVE)
-@SP
-A=M-1
-M=D
-@ARITHMETIC_LIB_END
-0;JMP
-(ARITHMETIC_NEG)
-@SP
-A=M-1
-M=-M
-@ARITHMETIC_LIB_END
-0;JMP
-(ARITHMETIC_NOT)
-@SP
-A=M-1
-M=!M
-@ARITHMETIC_LIB_END
-0;JMP
-(ARITHMETIC_OR)
-@SP
-AM=M-1
-D=M
-A=A-1
-M=M|D
-@ARITHMETIC_LIB_END
-0;JMP
-(ARITHMETIC_SUB)
-@SP
-AM=M-1
-D=M
-A=A-1
-M=M-D
-(ARITHMETIC_LIB_END)
-@R14
-A=M
-0;JMP
-(PROGRAM_START)
-@17
-D=A
-@SP
-AM=M+1
-A=A-1
-M=D
-@17
-D=A
-@SP
-AM=M+1
-A=A-1
-M=D
-@104
-D=A
-@R14
-M=D
-@ARITHMETIC_EQ
-0;JMP
-@17
-D=A
-@SP
-AM=M+1
-A=A-1
-M=D
-@16
-D=A
-@SP
-AM=M+1
-A=A-1
-M=D
-@122
-D=A
-@R14
-M=D
-@ARITHMETIC_EQ
-0;JMP
-@16
-D=A
-@SP
-AM=M+1
-A=A-1
-M=D
-@17
-D=A
-@SP
-AM=M+1
-A=A-1
-M=D
-@140
-D=A
-@R14
-M=D
-@ARITHMETIC_EQ
-0;JMP
-@892
-D=A
-@SP
-AM=M+1
-A=A-1
-M=D
-@891
-D=A
-@SP
-AM=M+1
-A=A-1
-M=D
-@158
-D=A
-@R14
-M=D
-@ARITHMETIC_LT
-0;JMP
-@891
-D=A
-@SP
-AM=M+1
-A=A-1
-M=D
-@892
-D=A
-@SP
-AM=M+1
-A=A-1
-M=D
-@176
-D=A
-@R14
-M=D
-@ARITHMETIC_LT
-0;JMP
-@891
-D=A
-@SP
-AM=M+1
-A=A-1
-M=D
-@891
-D=A
-@SP
-AM=M+1
-A=A-1
-M=D
-@194
-D=A
-@R14
-M=D
-@ARITHMETIC_LT
-0;JMP
-@32767
-D=A
-@SP
-AM=M+1
-A=A-1
-M=D
-@32766
-D=A
-@SP
-AM=M+1
-A=A-1
-M=D
-@212
-D=A
-@R14
-M=D
-@ARITHMETIC_GT
-0;JMP
-@32766
-D=A
-@SP
-AM=M+1
-A=A-1
-M=D
-@32767
-D=A
-@SP
-AM=M+1
-A=A-1
-M=D
-@230
-D=A
-@R14
-M=D
-@ARITHMETIC_GT
-0;JMP
-@32766
-D=A
-@SP
-AM=M+1
-A=A-1
-M=D
-@32766
-D=A
-@SP
-AM=M+1
-A=A-1
-M=D
-@248
-D=A
-@R14
-M=D
-@ARITHMETIC_GT
-0;JMP
-@57
-D=A
-@SP
-AM=M+1
-A=A-1
-M=D
-@31
-D=A
-@SP
-AM=M+1
-A=A-1
-M=D
-@53
-D=A
-@SP
-AM=M+1
-A=A-1
-M=D
-@272
-D=A
-@R14
-M=D
-@ARITHMETIC_ADD
-0;JMP
-@112
-D=A
-@SP
-AM=M+1
-A=A-1
-M=D
-@284
-D=A
-@R14
-M=D
-@ARITHMETIC_SUB
-0;JMP
-@290
-D=A
-@R14
-M=D
-@ARITHMETIC_NEG
-0;JMP
-@296
-D=A
-@R14
-M=D
-@ARITHMETIC_AND
-0;JMP
-@82
-D=A
-@SP
-AM=M+1
-A=A-1
-M=D
-@308
-D=A
-@R14
-M=D
-@ARITHMETIC_OR
-0;JMP
-@314
-D=A
-@R14
-M=D
-@ARITHMETIC_NOT
-0;JMP
+@PROGRAM_START  //0
+0;JMP  //1
+(ARITHMETIC_ADD)  //2
+@SP  //2
+AM=M-1  //3
+D=M  //4
+A=A-1  //5
+M=M+D  //6
+@ARITHMETIC_LIB_END  //7
+0;JMP  //8
+(ARITHMETIC_AND)  //9
+@SP  //9
+AM=M-1  //10
+D=M  //11
+A=A-1  //12
+M=M&D  //13
+@ARITHMETIC_LIB_END  //14
+0;JMP  //15
+(ARITHMETIC_EQ)  //16
+@SP  //16
+AM=M-1  //17
+D=M  //18
+A=A-1  //19
+D=M-D  //20
+@ARITHMETIC_IS_EQUAL  //21
+D;JEQ  //22
+D=-1  //23
+(ARITHMETIC_IS_EQUAL)  //24
+@SP  //24
+A=M-1  //25
+M=!D  //26
+@ARITHMETIC_LIB_END  //27
+0;JMP  //28
+(ARITHMETIC_GT)  //29
+@SP  //29
+AM=M-1  //30
+D=M  //31
+A=A-1  //32
+D=M-D  //33
+@ARITHMETIC_IS_GT  //34
+D;JGT  //35
+D=0  //36
+@ARITHMETIC_GT_RESOLVE  //37
+0;JMP  //38
+(ARITHMETIC_IS_GT)  //39
+D=-1  //39
+(ARITHMETIC_GT_RESOLVE)  //40
+@SP  //40
+A=M-1  //41
+M=D  //42
+@ARITHMETIC_LIB_END  //43
+0;JMP  //44
+(ARITHMETIC_LT)  //45
+@SP  //45
+AM=M-1  //46
+D=M  //47
+A=A-1  //48
+D=M-D  //49
+@ARITHMETIC_IS_LT  //50
+D;JLT  //51
+D=0  //52
+@ARITHMETIC_LT_RESOLVE  //53
+0;JMP  //54
+(ARITHMETIC_IS_LT)  //55
+D=-1  //55
+(ARITHMETIC_LT_RESOLVE)  //56
+@SP  //56
+A=M-1  //57
+M=D  //58
+@ARITHMETIC_LIB_END  //59
+0;JMP  //60
+(ARITHMETIC_NEG)  //61
+@SP  //61
+A=M-1  //62
+M=-M  //63
+@ARITHMETIC_LIB_END  //64
+0;JMP  //65
+(ARITHMETIC_NOT)  //66
+@SP  //66
+A=M-1  //67
+M=!M  //68
+@ARITHMETIC_LIB_END  //69
+0;JMP  //70
+(ARITHMETIC_OR)  //71
+@SP  //71
+AM=M-1  //72
+D=M  //73
+A=A-1  //74
+M=M|D  //75
+@ARITHMETIC_LIB_END  //76
+0;JMP  //77
+(ARITHMETIC_SUB)  //78
+@SP  //78
+AM=M-1  //79
+D=M  //80
+A=A-1  //81
+M=M-D  //82
+(ARITHMETIC_LIB_END)  //83
+@R14  //83
+A=M  //84
+0;JMP  //85
+(PROGRAM_START)  //86
+@$V$_VALUE_$V$  //0
+D=A  //1
+@SP  //2
+AM=M+1  //3
+A=A-1  //4
+M=D  //5
+@$V$_VALUE_$V$  //0
+D=A  //1
+@SP  //2
+AM=M+1  //3
+A=A-1  //4
+M=D  //5
+@$C$_END_OF_BLOCK_$C$  //0
+D=A  //1
+@R14  //2
+M=D  //3
+@$_ARITHMETIC_LIB_$  //4
+0;JMP  //5
+@$V$_VALUE_$V$  //0
+D=A  //1
+@SP  //2
+AM=M+1  //3
+A=A-1  //4
+M=D  //5
+@$V$_VALUE_$V$  //0
+D=A  //1
+@SP  //2
+AM=M+1  //3
+A=A-1  //4
+M=D  //5
+@$C$_END_OF_BLOCK_$C$  //0
+D=A  //1
+@R14  //2
+M=D  //3
+@$_ARITHMETIC_LIB_$  //4
+0;JMP  //5
+@$V$_VALUE_$V$  //0
+D=A  //1
+@SP  //2
+AM=M+1  //3
+A=A-1  //4
+M=D  //5
+@$V$_VALUE_$V$  //0
+D=A  //1
+@SP  //2
+AM=M+1  //3
+A=A-1  //4
+M=D  //5
+@$C$_END_OF_BLOCK_$C$  //0
+D=A  //1
+@R14  //2
+M=D  //3
+@$_ARITHMETIC_LIB_$  //4
+0;JMP  //5
+@$V$_VALUE_$V$  //0
+D=A  //1
+@SP  //2
+AM=M+1  //3
+A=A-1  //4
+M=D  //5
+@$V$_VALUE_$V$  //0
+D=A  //1
+@SP  //2
+AM=M+1  //3
+A=A-1  //4
+M=D  //5
+@$C$_END_OF_BLOCK_$C$  //0
+D=A  //1
+@R14  //2
+M=D  //3
+@$_ARITHMETIC_LIB_$  //4
+0;JMP  //5
+@$V$_VALUE_$V$  //0
+D=A  //1
+@SP  //2
+AM=M+1  //3
+A=A-1  //4
+M=D  //5
+@$V$_VALUE_$V$  //0
+D=A  //1
+@SP  //2
+AM=M+1  //3
+A=A-1  //4
+M=D  //5
+@$C$_END_OF_BLOCK_$C$  //0
+D=A  //1
+@R14  //2
+M=D  //3
+@$_ARITHMETIC_LIB_$  //4
+0;JMP  //5
+@$V$_VALUE_$V$  //0
+D=A  //1
+@SP  //2
+AM=M+1  //3
+A=A-1  //4
+M=D  //5
+@$V$_VALUE_$V$  //0
+D=A  //1
+@SP  //2
+AM=M+1  //3
+A=A-1  //4
+M=D  //5
+@$C$_END_OF_BLOCK_$C$  //0
+D=A  //1
+@R14  //2
+M=D  //3
+@$_ARITHMETIC_LIB_$  //4
+0;JMP  //5
+@$V$_VALUE_$V$  //0
+D=A  //1
+@SP  //2
+AM=M+1  //3
+A=A-1  //4
+M=D  //5
+@$V$_VALUE_$V$  //0
+D=A  //1
+@SP  //2
+AM=M+1  //3
+A=A-1  //4
+M=D  //5
+@$C$_END_OF_BLOCK_$C$  //0
+D=A  //1
+@R14  //2
+M=D  //3
+@$_ARITHMETIC_LIB_$  //4
+0;JMP  //5
+@$V$_VALUE_$V$  //0
+D=A  //1
+@SP  //2
+AM=M+1  //3
+A=A-1  //4
+M=D  //5
+@$V$_VALUE_$V$  //0
+D=A  //1
+@SP  //2
+AM=M+1  //3
+A=A-1  //4
+M=D  //5
+@$C$_END_OF_BLOCK_$C$  //0
+D=A  //1
+@R14  //2
+M=D  //3
+@$_ARITHMETIC_LIB_$  //4
+0;JMP  //5
+@$V$_VALUE_$V$  //0
+D=A  //1
+@SP  //2
+AM=M+1  //3
+A=A-1  //4
+M=D  //5
+@$V$_VALUE_$V$  //0
+D=A  //1
+@SP  //2
+AM=M+1  //3
+A=A-1  //4
+M=D  //5
+@$C$_END_OF_BLOCK_$C$  //0
+D=A  //1
+@R14  //2
+M=D  //3
+@$_ARITHMETIC_LIB_$  //4
+0;JMP  //5
+@$V$_VALUE_$V$  //0
+D=A  //1
+@SP  //2
+AM=M+1  //3
+A=A-1  //4
+M=D  //5
+@$V$_VALUE_$V$  //0
+D=A  //1
+@SP  //2
+AM=M+1  //3
+A=A-1  //4
+M=D  //5
+@$V$_VALUE_$V$  //0
+D=A  //1
+@SP  //2
+AM=M+1  //3
+A=A-1  //4
+M=D  //5
+@$C$_END_OF_BLOCK_$C$  //0
+D=A  //1
+@R14  //2
+M=D  //3
+@$_ARITHMETIC_LIB_$  //4
+0;JMP  //5
+@$V$_VALUE_$V$  //0
+D=A  //1
+@SP  //2
+AM=M+1  //3
+A=A-1  //4
+M=D  //5
+@$C$_END_OF_BLOCK_$C$  //0
+D=A  //1
+@R14  //2
+M=D  //3
+@$_ARITHMETIC_LIB_$  //4
+0;JMP  //5
+@$C$_END_OF_BLOCK_$C$  //0
+D=A  //1
+@R14  //2
+M=D  //3
+@$_ARITHMETIC_LIB_$  //4
+0;JMP  //5
+@$C$_END_OF_BLOCK_$C$  //0
+D=A  //1
+@R14  //2
+M=D  //3
+@$_ARITHMETIC_LIB_$  //4
+0;JMP  //5
+@$V$_VALUE_$V$  //0
+D=A  //1
+@SP  //2
+AM=M+1  //3
+A=A-1  //4
+M=D  //5
+@$C$_END_OF_BLOCK_$C$  //0
+D=A  //1
+@R14  //2
+M=D  //3
+@$_ARITHMETIC_LIB_$  //4
+0;JMP  //5
+@$C$_END_OF_BLOCK_$C$  //0
+D=A  //1
+@R14  //2
+M=D  //3
+@$_ARITHMETIC_LIB_$  //4
+0;JMP  //5
