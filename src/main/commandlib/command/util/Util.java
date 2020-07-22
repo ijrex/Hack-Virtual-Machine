@@ -14,12 +14,12 @@ public class Util {
     return str;
   }
 
-  public static String parseVars(String args[], ArrayList<String> vars, String output) {
+  public static String parseArgs(String args[], ArrayList<String> vars, String output) {
     String parsedOutput = output;
 
     for (int i = 0; i < vars.size(); i++) {
       String regex = "\\$V\\$_" + vars.get(i) + "_\\$V\\$";
-      parsedOutput = parsedOutput.replaceAll(regex, args[i]);
+      parsedOutput = parsedOutput.replaceAll(regex, args[i + 1]);
     }
 
     return parsedOutput;

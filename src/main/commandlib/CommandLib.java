@@ -1,7 +1,6 @@
 package commandlib;
 
 import java.util.Map;
-import java.util.Arrays;
 import java.util.HashMap;
 
 import commandlib.command.*;
@@ -19,7 +18,8 @@ public class CommandLib {
   private void assignCommandDescriptions() {
     commands.put("init_arithmetic", new Command("arithmetic_lib.asm", null));
 
-    commands.put("push", new PushCommand(new String[] { "push-const.asm", "push-var.asm" }, null));
+    commands.put("push", new PushCommand(new String[] { "push-const.asm", "push-var.asm" },
+        new String[] { "push", "LOCATION", "VALUE" }));
 
     commands.put("add", new ArithmeticCommand("arithmetic.asm", "add"));
     commands.put("and", new ArithmeticCommand("arithmetic.asm", "and"));
@@ -27,7 +27,7 @@ public class CommandLib {
     commands.put("gt", new ArithmeticCommand("arithmetic.asm", "gt"));
     commands.put("lt", new ArithmeticCommand("arithmetic.asm", "lt"));
     commands.put("neg", new ArithmeticCommand("arithmetic.asm", "neg"));
-    commands.put("not", new ArithmeticCommand("arithmetic.asm", "mpt"));
+    commands.put("not", new ArithmeticCommand("arithmetic.asm", "not"));
     commands.put("or", new ArithmeticCommand("arithmetic.asm", "or"));
     commands.put("sub", new ArithmeticCommand("arithmetic.asm", "sub"));
   }
@@ -42,13 +42,11 @@ public class CommandLib {
     String commandType = args[0];
     Command command = commands.get(commandType);
 
-    String[] vars = Arrays.copyOfRange(args, 1, args.length);
-
-    return handleCommand(command, vars);
+    return handleCommand(command, args);
   }
 
-  private String handleCommand(Command command, String[] vars) {
+  private String handleCommand(Command command, String[] args) {
     linePos += command.getBlockHeight();
-    return command.write(vars, linePos);
+    return command.write(args, linePos);
   }
 }

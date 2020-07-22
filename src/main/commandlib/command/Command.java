@@ -11,17 +11,24 @@ import commandlib.command.util.*;
 
 public class Command {
   protected int blockHeight = 0;
+  protected String name;
   protected String output = "";
   protected ArrayList<String> vars = new ArrayList<String>();
 
-  public Command(String templateFile, String name) {
-    parseTemplateFile(templateFile);
-  }
+  public Command(String[] templateFiles, String[] inputArgs) {
+    this.name = inputArgs[0];
 
-  public Command(String[] templateFiles, String name) {
+    for (int i = 1; i < inputArgs.length; i++) {
+      vars.add(inputArgs[i]);
+    }
     for (String templateFile : templateFiles) {
       parseTemplateFile(templateFile);
     }
+  }
+
+  public Command(String templateFile, String name) {
+    this.name = name;
+    parseTemplateFile(templateFile);
   }
 
   public String write(String[] args, int linePos) {
