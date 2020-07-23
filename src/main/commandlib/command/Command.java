@@ -10,39 +10,33 @@ import java.util.ArrayList;
 import commandlib.command.util.*;
 
 public class Command {
-  protected int blockHeight = 0;
   protected String name;
-  protected String output = "";
+  protected ArrayList<String> output = new ArrayList<String>();
   protected ArrayList<String> vars = new ArrayList<String>();
 
-  public Command(String[] templateFiles, String[] inputArgs) {
+  public Command(String[] inputArgs) {
     this.name = inputArgs[0];
 
     for (int i = 1; i < inputArgs.length; i++) {
       vars.add(inputArgs[i]);
     }
-    for (String templateFile : templateFiles) {
-      parseTemplateFile(templateFile);
-    }
   }
 
   public Command(String templateFile, String name) {
     this.name = name;
-    parseTemplateFile(templateFile);
+    output = parseTemplateFile(templateFile);
   }
 
-  public String write(String[] args, int linePos) {
+  public ArrayList<String> write(String[] args, int linePos) {
     return output;
   }
 
-  public int getBlockHeight() {
-    return this.blockHeight;
-  }
-
-  private void parseTemplateFile(String templateFile) {
+  protected ArrayList<String> parseTemplateFile(String templateFile) {
     String[] types = { "asm", "xasm" };
     LoadFile file = new LoadFile(templateFile, types, "../../lib/command-library");
     File template = file.getFile();
+
+    ArrayList<String> commands = new ArrayList<String>();
 
     try {
       Scanner scanner = new Scanner(template);
@@ -53,11 +47,7 @@ public class Command {
         String trimmedLine = Util.trimExcess(line);
 
         if (trimmedLine.length() > 0) {
-          output += trimmedLine + "\n";
-
-          if (!trimmedLine.contains("(")) {
-            blockHeight++;
-          }
+          commands.add(trimmedLine);
         }
       }
       scanner.close();
@@ -66,5 +56,7 @@ public class Command {
       e.printStackTrace();
       System.exit(1);
     }
+
+    return commands;
   }
 }

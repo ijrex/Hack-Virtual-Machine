@@ -14,26 +14,41 @@ public class Util {
     return str;
   }
 
-  public static String parseArgs(String args[], ArrayList<String> vars, String output) {
-    String parsedOutput = output;
+  public static String parseArgs(String args[], ArrayList<String> vars, String str) {
+    String parsedStr = str;
 
     for (int i = 0; i < vars.size(); i++) {
       String regex = "\\$V\\$_" + vars.get(i) + "_\\$V\\$";
-      parsedOutput = parsedOutput.replaceAll(regex, args[i + 1]);
+      parsedStr = parsedStr.replaceAll(regex, args[i + 1]);
     }
 
-    return parsedOutput;
+    return parsedStr;
   }
 
-  public static String parseCommands(int linePos, String output) {
-    String parsedOutput = output;
+  public static String parseCommands(int linePos, int blockHeight, String str) {
+    String parsedStr = str;
 
     String regex = "\\$C\\$_END_OF_BLOCK_\\$C\\$";
-    int endOfBlock = linePos + 1;
+    int endOfBlock = linePos + blockHeight + 1;
 
-    parsedOutput = parsedOutput.replaceAll(regex, Integer.toString(endOfBlock));
+    parsedStr = parsedStr.replaceAll(regex, Integer.toString(endOfBlock));
 
-    return parsedOutput;
+    return parsedStr;
+  }
+
+  public static String mapMemoryVals(String line) {
+    switch (line) {
+      case ("@local"):
+        return "@R1";
+      case ("@argument"):
+        return "@R2";
+      case ("@this"):
+        return "@R3";
+      case ("@that"):
+        return "@R4";
+      default:
+        return line;
+    }
   }
 
 }

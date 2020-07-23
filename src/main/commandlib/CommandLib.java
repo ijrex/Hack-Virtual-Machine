@@ -5,6 +5,8 @@ import java.util.HashMap;
 
 import commandlib.command.*;
 
+import java.util.ArrayList;
+
 public class CommandLib {
 
   private Map<String, Command> commands = new HashMap<String, Command>();
@@ -18,8 +20,8 @@ public class CommandLib {
   private void assignCommandDescriptions() {
     commands.put("init_arithmetic", new Command("arithmetic_lib.asm", null));
 
-    commands.put("push", new PushCommand(new String[] { "push-const.asm", "push-var.asm" },
-        new String[] { "push", "LOCATION", "VALUE" }));
+    commands.put("push", new PushCommand(new String[] { "push", "LOCATION", "VALUE" }));
+    commands.put("pop", new PopCommand(new String[] { "pop", "LOCATION", "VALUE" }));
 
     commands.put("add", new ArithmeticCommand("arithmetic.asm", "add"));
     commands.put("and", new ArithmeticCommand("arithmetic.asm", "and"));
@@ -46,7 +48,17 @@ public class CommandLib {
   }
 
   private String handleCommand(Command command, String[] args) {
-    linePos += command.getBlockHeight();
-    return command.write(args, linePos);
+
+    ArrayList<String> out = command.write(args, linePos);
+    String parsedOutput = "";
+
+    for (String line : out) {
+      parsedOutput += line + "\n";
+      if (!line.contains("(")) {
+        linePos += 1;
+      }
+    }
+
+    return parsedOutput;
   }
 }

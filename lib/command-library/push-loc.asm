@@ -1,0 +1,8 @@
+@$V$_LOCATION_$V$
+D=M
+@$V$_VALUE_$V$
+D=A+D
+@SP
+AM=M-1
+A=A-1
+M=D
