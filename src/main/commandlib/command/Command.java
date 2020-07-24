@@ -4,42 +4,38 @@ import loadfile.LoadFile;
 import java.io.File;
 import java.io.IOException;
 import java.util.Scanner;
+
 import java.util.ArrayList;
 
 import commandlib.command.util.*;
-import commandlib.commandtype.*;
 
-public class Command {
+public abstract class Command {
+  protected String name;
+  protected ArrayList<String> output = new ArrayList<String>();
+  protected String[] vars = new String[3];
 
-  public int lineLength = 0;
-  public CommandType type;
-  public String name;
+  public Command(String[] inputArgs) {
+    this.name = inputArgs[0];
 
-  private String output = "";
-  private ArrayList<String> vars = new ArrayList<String>();
-
-  public Command(CommandType type, String name, String templateFile) {
-    this.init(type, name, templateFile);
-  }
-
-  public Command(CommandType type, String name, String templateFile, String[] inputVars) {
-    this.init(type, name, templateFile);
-
-    for (String var : inputVars) {
-      vars.add(var);
+    for (int i = 1; i < vars.length; i++) {
+      vars[i - 1] = inputArgs[i];
     }
   }
 
-  private void init(CommandType type, String name, String templateFile) {
-    this.type = type;
+  public Command(String name) {
     this.name = name;
-    this.parseTemplateFile(templateFile);
   }
 
-  private void parseTemplateFile(String templateFile) {
+  public ArrayList<String> write(String[] args, int linePos) {
+    return output;
+  }
+
+  protected ArrayList<String> parseTemplateFile(String templateFile) {
     String[] types = { "asm", "xasm" };
     LoadFile file = new LoadFile(templateFile, types, "../../lib/command-library");
     File template = file.getFile();
+
+    ArrayList<String> commands = new ArrayList<String>();
 
     try {
       Scanner scanner = new Scanner(template);
@@ -50,11 +46,7 @@ public class Command {
         String trimmedLine = Util.trimExcess(line);
 
         if (trimmedLine.length() > 0) {
-          output += trimmedLine + "\n";
-
-          if (!trimmedLine.contains("(")) {
-            lineLength++;
-          }
+          commands.add(trimmedLine);
         }
       }
       scanner.close();
@@ -63,17 +55,7 @@ public class Command {
       e.printStackTrace();
       System.exit(1);
     }
-  }
 
-  public String write(String[] args, int linePos) {
-
-    switch (type) {
-      case LIB:
-        return this.output;
-      case C_ARITHMETIC:
-        return Write.arithmetic(name, linePos, output);
-      default:
-        return Write.standard(args, vars, output);
-    }
+    return commands;
   }
 }
