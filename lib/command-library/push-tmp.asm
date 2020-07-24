@@ -1,5 +1,5 @@
 @$V$_LOCATION_$V$
-D=M
+D=A
 @$V$_VALUE_$V$
 A=A+D
 D=M

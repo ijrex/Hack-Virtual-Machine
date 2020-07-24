@@ -7,11 +7,13 @@ public class PushCommand extends Command {
 
   protected ArrayList<String> pushConstant = new ArrayList<String>();
   protected ArrayList<String> pushLocation = new ArrayList<String>();
+  protected ArrayList<String> pushTemp = new ArrayList<String>();
 
   public PushCommand(String[] inputVars) {
     super(inputVars);
     pushConstant = parseTemplateFile("push-const.asm");
     pushLocation = parseTemplateFile("push-loc.asm");
+    pushTemp = parseTemplateFile("push-tmp.asm");
   }
 
   public ArrayList<String> write(String[] args, int linePos) {
@@ -21,14 +23,17 @@ public class PushCommand extends Command {
 
     switch (pushType) {
       case "constant":
-        parsedOutput = parseArithmetic(pushConstant, args, linePos);
+        parsedOutput = parsePush(pushConstant, args, linePos);
         break;
       case "argument":
       case "local":
-      case "temp":
       case "that":
       case "this":
-        parsedOutput = parseArithmetic(pushLocation, args, linePos);
+        parsedOutput = parsePush(pushLocation, args, linePos);
+        break;
+      case "temp":
+        parsedOutput = parsePush(pushTemp, args, linePos);
+        break;
       default:
         break;
     }
@@ -36,7 +41,7 @@ public class PushCommand extends Command {
 
   }
 
-  private ArrayList<String> parseArithmetic(ArrayList<String> templateFile, String[] args, int linePos) {
+  private ArrayList<String> parsePush(ArrayList<String> templateFile, String[] args, int linePos) {
     ArrayList<String> parsedOutput = new ArrayList<String>();
 
     templateFile.forEach((line) -> {

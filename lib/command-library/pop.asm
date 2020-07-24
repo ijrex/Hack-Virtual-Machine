@@ -2,8 +2,12 @@
 D=M
 @$V$_VALUE_$V$
 D=A+D
-@SP
-A=M
+@R14
 M=D
 @SP
-M=M+1
+M=M-1
+A=M
+D=M
+@R14
+A=M
+M=D

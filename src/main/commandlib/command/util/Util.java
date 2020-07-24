@@ -46,6 +46,8 @@ public class Util {
         return "@R3";
       case ("@that"):
         return "@R4";
+      case ("@temp"):
+        return "@R5";
       default:
         return line;
     }
