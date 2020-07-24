@@ -6,8 +6,11 @@ import commandlib.command.util.*;
 
 public class ArithmeticCommand extends Command {
 
-  public ArithmeticCommand(String arg, String name) {
-    super(arg, name);
+  protected ArrayList<String> output = new ArrayList<String>();
+
+  public ArithmeticCommand(String name) {
+    super(name);
+    output = parseTemplateFile("arithmetic.asm");
   }
 
   public ArrayList<String> write(String[] args, int linePos) {

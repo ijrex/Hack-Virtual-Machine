@@ -301,11 +301,10 @@ D=A
 A=A+D
 D=M
 @SP
-A=M
+AM=M+1
+A=A-1
 M=D
-@SP
-M=M+1
-@297
+@296
 D=A
 @R14
 M=D

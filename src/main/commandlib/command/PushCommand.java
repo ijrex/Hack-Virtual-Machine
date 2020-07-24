@@ -23,16 +23,16 @@ public class PushCommand extends Command {
 
     switch (pushType) {
       case "constant":
-        parsedOutput = parsePush(pushConstant, args, linePos);
+        parsedOutput = Util.parsePushPop(pushConstant, args, vars, linePos);
         break;
       case "argument":
       case "local":
       case "that":
       case "this":
-        parsedOutput = parsePush(pushLocation, args, linePos);
+        parsedOutput = Util.parsePushPop(pushLocation, args, vars, linePos);
         break;
       case "temp":
-        parsedOutput = parsePush(pushTemp, args, linePos);
+        parsedOutput = Util.parsePushPop(pushTemp, args, vars, linePos);
         break;
       default:
         break;
@@ -40,18 +40,4 @@ public class PushCommand extends Command {
     return parsedOutput;
 
   }
-
-  private ArrayList<String> parsePush(ArrayList<String> templateFile, String[] args, int linePos) {
-    ArrayList<String> parsedOutput = new ArrayList<String>();
-
-    templateFile.forEach((line) -> {
-      String parsedLine = "";
-      parsedLine = Util.parseArgs(args, vars, line);
-      parsedLine = Util.mapMemoryVals(parsedLine);
-      parsedOutput.add(parsedLine);
-    });
-
-    return parsedOutput;
-  }
-
 }

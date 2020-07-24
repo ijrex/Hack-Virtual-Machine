@@ -9,22 +9,21 @@ import java.util.ArrayList;
 
 import commandlib.command.util.*;
 
-public class Command {
+public abstract class Command {
   protected String name;
   protected ArrayList<String> output = new ArrayList<String>();
-  protected ArrayList<String> vars = new ArrayList<String>();
+  protected String[] vars = new String[3];
 
   public Command(String[] inputArgs) {
     this.name = inputArgs[0];
 
-    for (int i = 1; i < inputArgs.length; i++) {
-      vars.add(inputArgs[i]);
+    for (int i = 1; i < vars.length; i++) {
+      vars[i - 1] = inputArgs[i];
     }
   }
 
-  public Command(String templateFile, String name) {
+  public Command(String name) {
     this.name = name;
-    output = parseTemplateFile(templateFile);
   }
 
   public ArrayList<String> write(String[] args, int linePos) {

@@ -24,27 +24,14 @@ public class PopCommand extends Command {
       case "local":
       case "that":
       case "this":
-        parsedOutput = parsePop(pop, args, linePos);
+        parsedOutput = Util.parsePushPop(pop, args, vars, linePos);
         break;
       case "temp":
-        parsedOutput = parsePop(popTemp, args, linePos);
+        parsedOutput = Util.parsePushPop(popTemp, args, vars, linePos);
         break;
       default:
         break;
     }
-    return parsedOutput;
-  }
-
-  private ArrayList<String> parsePop(ArrayList<String> templateFile, String[] args, int linePos) {
-    ArrayList<String> parsedOutput = new ArrayList<String>();
-
-    templateFile.forEach((line) -> {
-      String parsedLine = "";
-      parsedLine = Util.parseArgs(args, vars, line);
-      parsedLine = Util.mapMemoryVals(parsedLine);
-      parsedOutput.add(parsedLine);
-    });
-
     return parsedOutput;
   }
 }

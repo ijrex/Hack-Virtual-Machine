@@ -14,12 +14,15 @@ public class Util {
     return str;
   }
 
-  public static String parseArgs(String args[], ArrayList<String> vars, String str) {
+  public static String parseArgs(String[] args, String[] vars, String str) {
     String parsedStr = str;
 
-    for (int i = 0; i < vars.size(); i++) {
-      String regex = "\\$V\\$_" + vars.get(i) + "_\\$V\\$";
-      parsedStr = parsedStr.replaceAll(regex, args[i + 1]);
+    for (int i = 0; i < vars.length; i++) {
+      if (vars[i] != null) {
+        String regex = "\\$V\\$_" + vars[i] + "_\\$V\\$";
+        parsedStr = parsedStr.replaceAll(regex, args[i + 1]);
+      }
+
     }
 
     return parsedStr;
@@ -34,6 +37,20 @@ public class Util {
     parsedStr = parsedStr.replaceAll(regex, Integer.toString(endOfBlock));
 
     return parsedStr;
+  }
+
+  public static ArrayList<String> parsePushPop(ArrayList<String> templateFile, String[] args, String[] vars,
+      int linePos) {
+    ArrayList<String> parsedOutput = new ArrayList<String>();
+
+    templateFile.forEach((line) -> {
+      String parsedLine = "";
+      parsedLine = parseArgs(args, vars, line);
+      parsedLine = mapMemoryVals(parsedLine);
+      parsedOutput.add(parsedLine);
+    });
+
+    return parsedOutput;
   }
 
   public static String mapMemoryVals(String line) {

@@ -18,20 +18,20 @@ public class CommandLib {
   }
 
   private void assignCommandDescriptions() {
-    commands.put("init_arithmetic", new Command("arithmetic_lib.asm", null));
+    commands.put("init_arithmetic", new InitCommand("arithmetic_lib.asm"));
 
     commands.put("push", new PushCommand(new String[] { "push", "LOCATION", "VALUE" }));
     commands.put("pop", new PopCommand(new String[] { "pop", "LOCATION", "VALUE" }));
 
-    commands.put("add", new ArithmeticCommand("arithmetic.asm", "add"));
-    commands.put("and", new ArithmeticCommand("arithmetic.asm", "and"));
-    commands.put("eq", new ArithmeticCommand("arithmetic.asm", "eq"));
-    commands.put("gt", new ArithmeticCommand("arithmetic.asm", "gt"));
-    commands.put("lt", new ArithmeticCommand("arithmetic.asm", "lt"));
-    commands.put("neg", new ArithmeticCommand("arithmetic.asm", "neg"));
-    commands.put("not", new ArithmeticCommand("arithmetic.asm", "not"));
-    commands.put("or", new ArithmeticCommand("arithmetic.asm", "or"));
-    commands.put("sub", new ArithmeticCommand("arithmetic.asm", "sub"));
+    commands.put("add", new ArithmeticCommand("add"));
+    commands.put("and", new ArithmeticCommand("and"));
+    commands.put("eq", new ArithmeticCommand("eq"));
+    commands.put("gt", new ArithmeticCommand("gt"));
+    commands.put("lt", new ArithmeticCommand("lt"));
+    commands.put("neg", new ArithmeticCommand("neg"));
+    commands.put("not", new ArithmeticCommand("not"));
+    commands.put("or", new ArithmeticCommand("or"));
+    commands.put("sub", new ArithmeticCommand("sub"));
   }
 
   public String init() {
