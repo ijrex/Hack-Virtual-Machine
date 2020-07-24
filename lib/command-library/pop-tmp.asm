@@ -5,8 +5,7 @@ D=A+D
 @R14
 M=D
 @SP
-M=M-1
-A=M
+AM=M-1
 D=M
 @R14
 A=M

@@ -10,7 +10,7 @@ public class PopCommand extends Command {
 
   public PopCommand(String[] inputVars) {
     super(inputVars);
-    pop = parseTemplateFile("pop.asm");
+    pop = parseTemplateFile("pop-loc.asm");
     popTemp = parseTemplateFile("pop-tmp.asm");
   }
 
