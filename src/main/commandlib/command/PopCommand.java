@@ -1,6 +1,6 @@
 package commandlib.command;
 
-import commandlib.command.util.Parse;
+import commandlib.command.util.*;
 import commandlib.command.memorylocation.*;
 
 public class PopCommand extends Command {
@@ -10,8 +10,8 @@ public class PopCommand extends Command {
 
   public PopCommand(String[] argVars) {
     super(argVars);
-    popLocation = parseTemplateFile("pop-location.asm");
-    popTemp = parseTemplateFile("pop-temp.asm");
+    popLocation = Util.parseTemplateFile("pop-location.asm");
+    popTemp = Util.parseTemplateFile("pop-temp.asm");
   }
 
   public String[] write(String[] args, int linePos) {
