@@ -1,6 +1,6 @@
 package commandlib.command;
 
-import commandlib.command.util.Parse;
+import commandlib.command.util.*;
 import commandlib.command.memorylocation.*;
 
 public class PushCommand extends Command {
@@ -11,9 +11,9 @@ public class PushCommand extends Command {
 
   public PushCommand(String[] argVars) {
     super(argVars);
-    pushConstant = parseTemplateFile("push-constant.asm");
-    pushLocation = parseTemplateFile("push-location.asm");
-    pushTemp = parseTemplateFile("push-temp.asm");
+    pushConstant = Util.parseTemplateFile("push-constant.asm");
+    pushLocation = Util.parseTemplateFile("push-location.asm");
+    pushTemp = Util.parseTemplateFile("push-temp.asm");
   }
 
   public String[] write(String[] args, int linePos) {
