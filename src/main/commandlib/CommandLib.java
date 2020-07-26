@@ -5,8 +5,6 @@ import java.util.HashMap;
 
 import commandlib.command.*;
 
-import java.util.ArrayList;
-
 public class CommandLib {
 
   private Map<String, Command> commands = new HashMap<String, Command>();
@@ -49,16 +47,14 @@ public class CommandLib {
 
   private String handleCommand(Command command, String[] args) {
 
-    ArrayList<String> out = command.write(args, linePos);
-    String parsedOutput = "";
+    String[] output = command.write(args, linePos);
 
-    for (String line : out) {
-      parsedOutput += line + "\n";
-      if (!line.contains("(")) {
+    for (String line : output) {
+      if (!line.matches("^\\(.+\\)")) {
         linePos += 1;
       }
     }
 
-    return parsedOutput;
+    return String.join("\n", output) + "\n";
   }
 }

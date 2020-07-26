@@ -1,38 +1,38 @@
 package commandlib.command;
 
-import java.util.ArrayList;
-import commandlib.command.util.*;
+import commandlib.command.util.Parse;
+import commandlib.command.memorylocation.*;
 
 public class PushCommand extends Command {
 
-  protected ArrayList<String> pushConstant = new ArrayList<String>();
-  protected ArrayList<String> pushLocation = new ArrayList<String>();
-  protected ArrayList<String> pushTemp = new ArrayList<String>();
+  protected String pushConstant;
+  protected String pushLocation;
+  protected String pushTemp;
 
-  public PushCommand(String[] inputVars) {
-    super(inputVars);
-    pushConstant = parseTemplateFile("push-const.asm");
-    pushLocation = parseTemplateFile("push-loc.asm");
-    pushTemp = parseTemplateFile("push-tmp.asm");
+  public PushCommand(String[] argVars) {
+    super(argVars);
+    pushConstant = parseTemplateFile("push-constant.asm");
+    pushLocation = parseTemplateFile("push-location.asm");
+    pushTemp = parseTemplateFile("push-temp.asm");
   }
 
-  public ArrayList<String> write(String[] args, int linePos) {
-    ArrayList<String> parsedOutput = new ArrayList<String>();
+  public String[] write(String[] args, int linePos) {
+    String[] parsedOutput = {};
 
-    String pushType = args[1];
+    MemoryLocation pushType = MemoryLocation.getType(args[1]);
 
     switch (pushType) {
-      case "constant":
-        parsedOutput = Util.parsePushPop(pushConstant, args, vars, linePos);
+      case CONSTANT:
+        parsedOutput = Parse.pushPop(pushConstant, args, argVars);
         break;
-      case "argument":
-      case "local":
-      case "that":
-      case "this":
-        parsedOutput = Util.parsePushPop(pushLocation, args, vars, linePos);
+      case ARGUMENT:
+      case LOCAL:
+      case THIS:
+      case THAT:
+        parsedOutput = Parse.pushPop(pushLocation, args, argVars);
         break;
-      case "temp":
-        parsedOutput = Util.parsePushPop(pushTemp, args, vars, linePos);
+      case TEMP:
+        parsedOutput = Parse.pushPop(pushTemp, args, argVars);
         break;
       default:
         break;

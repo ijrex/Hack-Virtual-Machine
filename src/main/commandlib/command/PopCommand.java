@@ -1,33 +1,33 @@
 package commandlib.command;
 
-import java.util.ArrayList;
-import commandlib.command.util.*;
+import commandlib.command.util.Parse;
+import commandlib.command.memorylocation.*;
 
 public class PopCommand extends Command {
 
-  protected ArrayList<String> pop = new ArrayList<String>();
-  protected ArrayList<String> popTemp = new ArrayList<String>();
+  protected String popLocation;
+  protected String popTemp;
 
-  public PopCommand(String[] inputVars) {
-    super(inputVars);
-    pop = parseTemplateFile("pop-loc.asm");
-    popTemp = parseTemplateFile("pop-tmp.asm");
+  public PopCommand(String[] argVars) {
+    super(argVars);
+    popLocation = parseTemplateFile("pop-location.asm");
+    popTemp = parseTemplateFile("pop-temp.asm");
   }
 
-  public ArrayList<String> write(String[] args, int linePos) {
-    ArrayList<String> parsedOutput = new ArrayList<String>();
+  public String[] write(String[] args, int linePos) {
+    String[] parsedOutput = {};
 
-    String popType = args[1];
+    MemoryLocation popType = MemoryLocation.getType(args[1]);
 
     switch (popType) {
-      case "argument":
-      case "local":
-      case "that":
-      case "this":
-        parsedOutput = Util.parsePushPop(pop, args, vars, linePos);
+      case ARGUMENT:
+      case LOCAL:
+      case THIS:
+      case THAT:
+        parsedOutput = Parse.pushPop(popLocation, args, argVars);
         break;
-      case "temp":
-        parsedOutput = Util.parsePushPop(popTemp, args, vars, linePos);
+      case TEMP:
+        parsedOutput = Parse.pushPop(popTemp, args, argVars);
         break;
       default:
         break;

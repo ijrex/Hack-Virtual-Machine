@@ -1,31 +1,25 @@
 package commandlib.command;
 
-import java.util.ArrayList;
-
 import commandlib.command.util.*;
 
 public class ArithmeticCommand extends Command {
-
-  protected ArrayList<String> output = new ArrayList<String>();
 
   public ArithmeticCommand(String name) {
     super(name);
     output = parseTemplateFile("arithmetic.asm");
   }
 
-  public ArrayList<String> write(String[] args, int linePos) {
-    ArrayList<String> parsedOutput = new ArrayList<String>();
+  public String[] write(String[] args, int linePos) {
+    String parsedOutput = output;
 
     String regex = "\\$_ARITHMETIC_LIB_\\$";
+    parsedOutput = output.replaceAll(regex, "ARITHMETIC_" + name.toUpperCase());
 
-    output.forEach((line) -> {
-      String parsedLine = "";
-      parsedLine = line.replaceAll(regex, "ARITHMETIC_" + name.toUpperCase());
-      parsedLine = Util.parseCommands(linePos, output.size(), parsedLine);
-      parsedOutput.add(parsedLine);
-    });
+    String[] parsedOutputArr = parsedOutput.split("\n");
 
-    return parsedOutput;
+    parsedOutputArr = Parse.commands(linePos, parsedOutputArr.length, parsedOutputArr);
+
+    return parsedOutputArr;
   }
 
 }

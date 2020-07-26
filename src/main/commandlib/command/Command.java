@@ -5,20 +5,18 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Scanner;
 
-import java.util.ArrayList;
-
 import commandlib.command.util.*;
 
 public abstract class Command {
   protected String name;
-  protected ArrayList<String> output = new ArrayList<String>();
-  protected String[] vars = new String[3];
+  protected String output;
+  protected String[] argVars = new String[3];
 
-  public Command(String[] inputArgs) {
-    this.name = inputArgs[0];
+  public Command(String[] _argVars) {
+    this.name = _argVars[0];
 
-    for (int i = 1; i < vars.length; i++) {
-      vars[i - 1] = inputArgs[i];
+    for (int i = 1; i < argVars.length; i++) {
+      argVars[i - 1] = _argVars[i];
     }
   }
 
@@ -26,16 +24,16 @@ public abstract class Command {
     this.name = name;
   }
 
-  public ArrayList<String> write(String[] args, int linePos) {
-    return output;
+  public String[] write(String[] args, int linePos) {
+    return output.split("\n");
   }
 
-  protected ArrayList<String> parseTemplateFile(String templateFile) {
+  protected String parseTemplateFile(String templateFile) {
     String[] types = { "asm", "xasm" };
     LoadFile file = new LoadFile(templateFile, types, "../../lib/command-library");
     File template = file.getFile();
 
-    ArrayList<String> commands = new ArrayList<String>();
+    String parsedOutput = "";
 
     try {
       Scanner scanner = new Scanner(template);
@@ -46,7 +44,7 @@ public abstract class Command {
         String trimmedLine = Util.trimExcess(line);
 
         if (trimmedLine.length() > 0) {
-          commands.add(trimmedLine);
+          parsedOutput += trimmedLine + "\n";
         }
       }
       scanner.close();
@@ -56,6 +54,6 @@ public abstract class Command {
       System.exit(1);
     }
 
-    return commands;
+    return parsedOutput;
   }
 }
