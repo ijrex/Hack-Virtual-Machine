@@ -4,19 +4,6 @@ import commandlib.command.memorylocation.*;
 
 public class Parse {
 
-  public static String args(String[] args, String[] argVars, String str) {
-    String parsedStr = str;
-
-    for (int i = 0; i < argVars.length; i++) {
-      if (argVars[i] != null) {
-        String regex = "\\$V\\$_" + argVars[i] + "_\\$V\\$";
-        parsedStr = parsedStr.replaceAll(regex, args[i + 1]);
-      }
-    }
-
-    return parsedStr;
-  }
-
   public static String[] commands(int linePos, int blockHeight, String[] strArr) {
     String[] parsedOutputArr = strArr;
 
@@ -30,10 +17,31 @@ public class Parse {
     return parsedOutputArr;
   }
 
-  public static String[] pushPop(String templateFile, String[] args, String[] argVars) {
+  public static String args(String[] args, String[] argVars, String str) {
+    String parsedStr = str;
+
+    for (int i = 0; i < argVars.length; i++) {
+      if (argVars[i] != null) {
+        String regex = "\\$V\\$_" + argVars[i] + "_\\$V\\$";
+        parsedStr = parsedStr.replaceAll(regex, args[i + 1]);
+      }
+    }
+
+    return parsedStr;
+  }
+
+  public static String staticArgs(String[] args, String str) {
+    return str.replaceAll("\\$S\\$_STATIC_\\$S\\$", "function." + args[2]);
+  }
+
+  public static String[] pushPop(String templateFile, String[] args, String[] argVars, MemoryLocation pushPopType) {
     String parsedOutput = "";
 
     parsedOutput = args(args, argVars, templateFile);
+
+    if (pushPopType == MemoryLocation.STATIC) {
+      parsedOutput = staticArgs(args, parsedOutput);
+    }
 
     String[] parsedOutputArr = parsedOutput.split("\n");
 

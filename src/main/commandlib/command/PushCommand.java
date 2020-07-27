@@ -8,12 +8,14 @@ public class PushCommand extends Command {
   protected String pushConstant;
   protected String pushLocation;
   protected String pushBase;
+  protected String pushStatic;
 
   public PushCommand(String[] argVars) {
     super(argVars);
     pushConstant = Util.loadTemplateFile("push-constant.asm");
     pushLocation = Util.loadTemplateFile("push-location.asm");
     pushBase = Util.loadTemplateFile("push-base.asm");
+    pushStatic = Util.loadTemplateFile("push-static.asm");
   }
 
   public String[] write(String[] args, int linePos) {
@@ -23,17 +25,19 @@ public class PushCommand extends Command {
 
     switch (pushType) {
       case CONSTANT:
-        parsedOutput = Parse.pushPop(pushConstant, args, argVars);
+        parsedOutput = Parse.pushPop(pushConstant, args, argVars, pushType);
         break;
       case ARGUMENT:
       case LOCAL:
       case THIS:
       case THAT:
-        parsedOutput = Parse.pushPop(pushLocation, args, argVars);
+        parsedOutput = Parse.pushPop(pushLocation, args, argVars, pushType);
         break;
       case TEMP:
       case POINTER:
-        parsedOutput = Parse.pushPop(pushBase, args, argVars);
+        parsedOutput = Parse.pushPop(pushBase, args, argVars, pushType);
+      case STATIC:
+        parsedOutput = Parse.pushPop(pushStatic, args, argVars, pushType);
         break;
       default:
         break;
