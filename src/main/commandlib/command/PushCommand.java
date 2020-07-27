@@ -7,13 +7,13 @@ public class PushCommand extends Command {
 
   protected String pushConstant;
   protected String pushLocation;
-  protected String pushTemp;
+  protected String pushBase;
 
   public PushCommand(String[] argVars) {
     super(argVars);
-    pushConstant = Util.parseTemplateFile("push-constant.asm");
-    pushLocation = Util.parseTemplateFile("push-location.asm");
-    pushTemp = Util.parseTemplateFile("push-temp.asm");
+    pushConstant = Util.loadTemplateFile("push-constant.asm");
+    pushLocation = Util.loadTemplateFile("push-location.asm");
+    pushBase = Util.loadTemplateFile("push-base.asm");
   }
 
   public String[] write(String[] args, int linePos) {
@@ -32,7 +32,8 @@ public class PushCommand extends Command {
         parsedOutput = Parse.pushPop(pushLocation, args, argVars);
         break;
       case TEMP:
-        parsedOutput = Parse.pushPop(pushTemp, args, argVars);
+      case POINTER:
+        parsedOutput = Parse.pushPop(pushBase, args, argVars);
         break;
       default:
         break;

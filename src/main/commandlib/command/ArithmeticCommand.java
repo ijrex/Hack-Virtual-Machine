@@ -6,7 +6,7 @@ public class ArithmeticCommand extends Command {
 
   public ArithmeticCommand(String name) {
     super(name);
-    output = Util.parseTemplateFile("arithmetic.asm");
+    output = Util.loadTemplateFile("arithmetic.asm");
   }
 
   public String[] write(String[] args, int linePos) {

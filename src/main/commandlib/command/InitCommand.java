@@ -6,6 +6,6 @@ public class InitCommand extends Command {
 
   public InitCommand(String templateFile) {
     super(templateFile);
-    output = Util.parseTemplateFile(templateFile);
+    output = Util.loadTemplateFile(templateFile);
   }
 }
