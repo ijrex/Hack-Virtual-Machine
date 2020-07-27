@@ -1,7 +1,8 @@
 package commandlib.command.memorylocation;
 
 public enum MemoryLocation {
-  CONSTANT(null), LOCAL("R1"), ARGUMENT("R2"), THIS("R3"), THAT("R4"), TEMP("R5"), POINTER(THIS.getValue()), NULL(null);
+  CONSTANT(null), LOCAL("R1"), ARGUMENT("R2"), THIS("R3"), THAT("R4"), TEMP("R5"), POINTER(THIS.getValue()),
+  STATIC(null), NULL(null);
 
   private final String value;
 

@@ -7,11 +7,13 @@ public class PopCommand extends Command {
 
   protected String popLocation;
   protected String popBase;
+  protected String popStatic;
 
   public PopCommand(String[] argVars) {
     super(argVars);
     popLocation = Util.loadTemplateFile("pop-location.asm");
     popBase = Util.loadTemplateFile("pop-base.asm");
+    popStatic = Util.loadTemplateFile("pop-static.asm");
   }
 
   public String[] write(String[] args, int linePos) {
@@ -24,11 +26,13 @@ public class PopCommand extends Command {
       case LOCAL:
       case THIS:
       case THAT:
-        parsedOutput = Parse.pushPop(popLocation, args, argVars);
+        parsedOutput = Parse.pushPop(popLocation, args, argVars, popType);
         break;
       case TEMP:
       case POINTER:
-        parsedOutput = Parse.pushPop(popBase, args, argVars);
+        parsedOutput = Parse.pushPop(popBase, args, argVars, popType);
+      case STATIC:
+        parsedOutput = Parse.pushPop(popStatic, args, argVars, popType);
         break;
       default:
         break;
