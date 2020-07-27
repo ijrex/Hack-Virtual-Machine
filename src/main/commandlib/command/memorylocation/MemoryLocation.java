@@ -1,7 +1,7 @@
 package commandlib.command.memorylocation;
 
 public enum MemoryLocation {
-  CONSTANT(null), LOCAL("R1"), ARGUMENT("R2"), THIS("R3"), THAT("R4"), TEMP("R5"), NULL(null);
+  CONSTANT(null), LOCAL("R1"), ARGUMENT("R2"), THIS("R3"), THAT("R4"), TEMP("R5"), POINTER(THIS.getValue()), NULL(null);
 
   private final String value;
 
@@ -28,19 +28,10 @@ public enum MemoryLocation {
 
     MemoryLocation location = MemoryLocation.getType(arg);
 
-    switch (location) {
-      case LOCAL:
-        return "@" + MemoryLocation.LOCAL.getValue();
-      case ARGUMENT:
-        return "@" + MemoryLocation.ARGUMENT.getValue();
-      case THIS:
-        return "@" + MemoryLocation.THIS.getValue();
-      case THAT:
-        return "@" + MemoryLocation.THAT.getValue();
-      case TEMP:
-        return "@" + MemoryLocation.TEMP.getValue();
-      default:
-        return line;
+    if (location != MemoryLocation.NULL) {
+      return "@" + location.getValue();
     }
+
+    return line;
   }
 }

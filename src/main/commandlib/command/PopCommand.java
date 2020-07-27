@@ -6,12 +6,12 @@ import commandlib.command.memorylocation.*;
 public class PopCommand extends Command {
 
   protected String popLocation;
-  protected String popTemp;
+  protected String popBase;
 
   public PopCommand(String[] argVars) {
     super(argVars);
-    popLocation = Util.parseTemplateFile("pop-location.asm");
-    popTemp = Util.parseTemplateFile("pop-temp.asm");
+    popLocation = Util.loadTemplateFile("pop-location.asm");
+    popBase = Util.loadTemplateFile("pop-base.asm");
   }
 
   public String[] write(String[] args, int linePos) {
@@ -27,7 +27,8 @@ public class PopCommand extends Command {
         parsedOutput = Parse.pushPop(popLocation, args, argVars);
         break;
       case TEMP:
-        parsedOutput = Parse.pushPop(popTemp, args, argVars);
+      case POINTER:
+        parsedOutput = Parse.pushPop(popBase, args, argVars);
         break;
       default:
         break;

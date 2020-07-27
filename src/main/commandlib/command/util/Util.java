@@ -17,7 +17,7 @@ public class Util {
     return str;
   }
 
-  public static String parseTemplateFile(String templateFile) {
+  public static String loadTemplateFile(String templateFile) {
     String[] types = { "asm", "xasm" };
     LoadFile file = new LoadFile(templateFile, types, "../../lib/command-library");
     File template = file.getFile();
