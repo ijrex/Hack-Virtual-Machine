@@ -8,7 +8,7 @@ class VMAssembler {
 
 	public static void main(String[] args) {
 
-		LoadFile file = new LoadFile("StaticTest.vm", "vm", "test-files");
+		LoadFile file = new LoadFile("BasicLoop.vm", "vm", "test-files");
 		File sourceFile = file.getFile();
 
 		CommandLib commandLib = new CommandLib();

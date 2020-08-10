@@ -30,10 +30,14 @@ public class CommandLib {
     commands.put("not", new ArithmeticCommand("not"));
     commands.put("or", new ArithmeticCommand("or"));
     commands.put("sub", new ArithmeticCommand("sub"));
+
+    commands.put("label", new LabelCommand(new String[] { "label", "NAME" }, true));
+    commands.put("if-goto", new GotoCommand(new String[] { "if-goto", "NAME" }, true));
+    // commands.put("if-goto", new GotoCommand("if-goto"));
   }
 
   public String init() {
-    return handleCommand(commands.get("init_arithmetic"), null);
+    return handleCommand(commands.get("init_arithmetic"), null, null);
   }
 
   public String write(String input) {
@@ -42,12 +46,21 @@ public class CommandLib {
     String commandType = args[0];
     Command command = commands.get(commandType);
 
-    return handleCommand(command, args);
+    // TODO: TAKE FUNCTION NAME FROM READ-WRITE
+    String functionName = "function";
+
+    return handleCommand(command, args, functionName);
   }
 
-  private String handleCommand(Command command, String[] args) {
+  private String handleCommand(Command command, String[] args, String functionName) {
 
-    String[] output = command.write(args, linePos);
+    String[] output;
+
+    if (!command.isFunctionDept) {
+      output = command.write(args, linePos);
+    } else {
+      output = command.write(args, linePos, functionName);
+    }
 
     for (String line : output) {
       if (!line.matches("^\\(.+\\)")) {
