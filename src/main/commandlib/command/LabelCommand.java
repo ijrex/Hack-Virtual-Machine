@@ -7,11 +7,10 @@ public class LabelCommand extends Command {
   }
 
   public String[] write(String[] args, int linePos, String functionName) {
-    String parsedOutput = functionName + "$" + args[0];
+    String parsedOutput = "(" + functionName + "$" + args[1] + ")";
 
     String[] parsedOutputArr = parsedOutput.split("\n");
 
     return parsedOutputArr;
   }
-
 }
