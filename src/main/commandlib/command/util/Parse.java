@@ -31,7 +31,7 @@ public class Parse {
   }
 
   public static String staticArgs(String[] args, String str) {
-    return str.replaceAll("\\$S\\$_STATIC_\\$S\\$", "function." + args[2]);
+    return str.replaceAll("\\$S\\$_STATIC_\\$S\\$", "vmfilename." + args[2]);
   }
 
   public static String[] pushPop(String templateFile, String[] args, String[] argVars, MemoryLocation pushPopType) {

@@ -36,6 +36,7 @@ public class PushCommand extends Command {
       case TEMP:
       case POINTER:
         parsedOutput = Parse.pushPop(pushBase, args, argVars, pushType);
+        break;
       case STATIC:
         parsedOutput = Parse.pushPop(pushStatic, args, argVars, pushType);
         break;

@@ -31,6 +31,7 @@ public class PopCommand extends Command {
       case TEMP:
       case POINTER:
         parsedOutput = Parse.pushPop(popBase, args, argVars, popType);
+        break;
       case STATIC:
         parsedOutput = Parse.pushPop(popStatic, args, argVars, popType);
         break;
