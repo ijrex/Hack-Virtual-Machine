@@ -25,7 +25,7 @@ public class GotoCommand extends Command {
 
     String location = functionName + "\\$" + args[1];
 
-    String regex = "\\$V\\$_FUNCTION_NAME_\\$V\\$";
+    String regex = "\\$V\\$_LABEL_\\$V\\$";
     parsedOutput = parsedOutput.replaceAll(regex, location);
 
     String[] parsedOutputArr = parsedOutput.split("\n");

@@ -11,6 +11,11 @@ public abstract class Command {
     this.name = name;
   }
 
+  public Command(String name, Boolean _isFunctionDept) {
+    this.isFunctionDept = true;
+    this.name = name;
+  }
+
   public Command(String[] _argVars) {
     this.init(_argVars);
   }

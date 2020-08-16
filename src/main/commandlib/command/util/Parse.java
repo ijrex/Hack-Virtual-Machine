@@ -51,4 +51,11 @@ public class Parse {
 
     return parsedOutputArr;
   }
+
+  public static String Function(String str, String functionName) {
+
+    String regex = "\\$V\\$_FUNCTION_\\$V\\$";
+    return str.replaceAll(regex, functionName);
+  }
+
 }

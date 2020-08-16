@@ -1,5 +1,5 @@
 @SP
 AM=M-1
 D=M
-@$V$_FUNCTION_NAME_$V$
+@$V$_LABEL_$V$
 D;JNE

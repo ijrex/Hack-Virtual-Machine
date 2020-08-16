@@ -34,6 +34,10 @@ public class CommandLib {
     commands.put("label", new LabelCommand(new String[] { "label", "LABEL_NAME" }, true));
     commands.put("if-goto", new GotoCommand(new String[] { "if-goto", "LABEL_NAME" }, true));
     commands.put("goto", new GotoCommand(new String[] { "goto", "LABEL_NAME" }, true));
+
+    commands.put("function", new FunctionCommand(new String[] { "function", "LABEL_NAME", "ARGS" }));
+    commands.put("return", new ReturnCommand("return", true));
+
   }
 
   public String init() {
