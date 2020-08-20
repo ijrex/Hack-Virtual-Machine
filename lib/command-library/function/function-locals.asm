@@ -1,3 +1,5 @@
+@$V$_VALUE_$V$
+D=A
 @LCL
-AM=M+1
+A=M+D
 M=0

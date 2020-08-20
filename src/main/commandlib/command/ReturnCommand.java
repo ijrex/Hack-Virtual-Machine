@@ -1,18 +1,17 @@
 package commandlib.command;
 
+import commandlib.command.util.*;
+
 public class ReturnCommand extends Command {
 
-  public ReturnCommand(String name, Boolean _isFunctionDept) {
-    super(name, _isFunctionDept);
+  public ReturnCommand(String name) {
+    super(name);
 
-    output = "return.asm";
+    output = Util.loadTemplateFile("return.asm");
+
   }
 
   public String[] write(String[] args, int linePos, String functionName) {
-
-    final int FRAME = linePos;
-
-    // String parsedOutput = output;
     String parsedOutput = output;
 
     String[] parsedOutputArr = parsedOutput.split("\n");

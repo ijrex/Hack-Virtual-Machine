@@ -17,7 +17,8 @@ public class FunctionCommand extends Command {
     String parsedOutput = functionDeclaration;
 
     for (int i = 0; i < localVars; i++) {
-      parsedOutput += output;
+      String regex = "\\$V\\$_VALUE_\\$V\\$";
+      parsedOutput += output.replaceAll(regex, Integer.toString(i));
     }
 
     String[] parsedOutputArr = parsedOutput.split("\n");
