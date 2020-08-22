@@ -36,6 +36,7 @@ public class CommandLib {
     commands.put("goto", new GotoCommand(new String[] { "goto", "LABEL_NAME" }, true));
 
     commands.put("function", new FunctionCommand(new String[] { "function", "LABEL_NAME", "ARGS" }));
+    commands.put("call", new CallCommand(new String[] { "call", "LABEL_NAME", "ARGS" }));
     commands.put("return", new ReturnCommand("return"));
 
   }
