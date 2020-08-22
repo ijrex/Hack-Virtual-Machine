@@ -1,13 +1,11 @@
 package readwrite.util;
 
-import java.io.File;
-
 public class Util {
-  public static String getOutputFilePath(File file) {
-    String filePath = file.getAbsolutePath();
-    filePath = filePath.substring(0, filePath.lastIndexOf("."));
+  public static String getOutputFilePath(String pathName) {
 
-    return filePath + ".asm";
+    String fileName = pathName.substring(pathName.lastIndexOf("/"));
+
+    return pathName + fileName + ".asm";
   }
 
   public static String trimExcess(String str) {
