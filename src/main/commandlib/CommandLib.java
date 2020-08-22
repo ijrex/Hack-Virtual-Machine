@@ -45,14 +45,11 @@ public class CommandLib {
     return handleCommand(commands.get("init_arithmetic"), null, null);
   }
 
-  public String write(String input) {
+  public String write(String input, String functionName) {
     String[] args = input.split(" ");
 
     String commandType = args[0];
     Command command = commands.get(commandType);
-
-    // TODO: TAKE FUNCTION NAME FROM READ-WRITE
-    String functionName = "function";
 
     return handleCommand(command, args, functionName);
   }
