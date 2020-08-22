@@ -1,2 +1,2 @@
-@$V$_FUNCTION_NAME_$V$
+@$V$_LABEL_$V$
 0;JMP
