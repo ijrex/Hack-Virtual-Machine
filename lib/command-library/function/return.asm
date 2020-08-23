@@ -54,4 +54,5 @@ M=D
 @R14
 M=M-1
 A=M
+A=M
 0;JMP
