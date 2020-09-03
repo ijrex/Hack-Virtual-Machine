@@ -7,7 +7,7 @@ class VMAssembler {
 
 	public static void main(String[] args) {
 
-		LoadFiles files = new LoadFiles("test-files/FunctionCalls/SimpleFunction", "vm");
+		LoadFiles files = new LoadFiles("test-files/FunctionCalls/NestedCall", "vm");
 
 		CommandLib commandLib = new CommandLib();
 

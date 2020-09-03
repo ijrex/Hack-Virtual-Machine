@@ -107,7 +107,7 @@ D=A
 AM=M+1
 A=A-1
 M=D
-@R3
+@THIS
 D=A
 @0
 D=A+D
@@ -125,7 +125,7 @@ D=A
 AM=M+1
 A=A-1
 M=D
-@R3
+@THIS
 D=A
 @1
 D=A+D
@@ -239,7 +239,7 @@ D=A
 AM=M+1
 A=A-1
 M=D
-@R3
+@THIS
 D=A
 @0
 D=A+D
@@ -257,7 +257,7 @@ D=A
 AM=M+1
 A=A-1
 M=D
-@R3
+@THIS
 D=A
 @1
 D=A+D
@@ -275,7 +275,7 @@ D=A
 AM=M+1
 A=A-1
 M=D
-@R1
+@LCL
 D=M
 @1
 D=A+D
@@ -293,7 +293,7 @@ D=A
 AM=M+1
 A=A-1
 M=D
-@R1
+@LCL
 D=M
 @2
 D=A+D
@@ -311,7 +311,7 @@ D=A
 AM=M+1
 A=A-1
 M=D
-@R1
+@LCL
 D=M
 @3
 D=A+D
@@ -386,7 +386,7 @@ D=M
 @R14
 A=M
 M=D
-@R1
+@LCL
 D=M
 @0
 A=A+D
@@ -395,7 +395,7 @@ D=M
 AM=M+1
 A=A-1
 M=D
-@R1
+@LCL
 D=M
 @1
 A=A+D
@@ -404,7 +404,7 @@ D=M
 AM=M+1
 A=A-1
 M=D
-@R1
+@LCL
 D=M
 @2
 A=A+D
@@ -413,7 +413,7 @@ D=M
 AM=M+1
 A=A-1
 M=D
-@R1
+@LCL
 D=M
 @3
 A=A+D
@@ -422,7 +422,7 @@ D=M
 AM=M+1
 A=A-1
 M=D
-@R1
+@LCL
 D=M
 @4
 A=A+D
@@ -511,7 +511,7 @@ D=A
 AM=M+1
 A=A-1
 M=D
-@R3
+@THIS
 D=A
 @0
 D=A+D
@@ -529,7 +529,7 @@ D=A
 AM=M+1
 A=A-1
 M=D
-@R3
+@THIS
 D=A
 @1
 D=A+D
@@ -541,7 +541,7 @@ D=M
 @R14
 A=M
 M=D
-@R2
+@ARG
 D=M
 @0
 A=A+D

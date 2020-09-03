@@ -115,7 +115,7 @@ A=M+D
 M=0
 @SP
 M=M+1
-@R1
+@LCL
 D=M
 @0
 A=A+D
@@ -124,7 +124,7 @@ D=M
 AM=M+1
 A=A-1
 M=D
-@R1
+@LCL
 D=M
 @1
 A=A+D
@@ -145,7 +145,7 @@ D=A
 M=D
 @ARITHMETIC_NOT
 0;JMP
-@R2
+@ARG
 D=M
 @0
 A=A+D
@@ -160,7 +160,7 @@ D=A
 M=D
 @ARITHMETIC_ADD
 0;JMP
-@R2
+@ARG
 D=M
 @1
 A=A+D
