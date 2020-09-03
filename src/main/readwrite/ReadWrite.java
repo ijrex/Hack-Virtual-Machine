@@ -24,13 +24,9 @@ public class ReadWrite {
 
       FileWriter fileWriter = new FileWriter(outputFile, false);
 
-      for (File sourceFile : sourceFiles) {
+      fileWriter.write(commandLib.init());
 
-        // TO DO: CHANGE INIT COMMANDS TO FUNCTIONS
-        if (currentFile == 1 || sourceFiles.size() == 1) {
-          fileWriter.write(commandLib.init());
-        }
-        //
+      for (File sourceFile : sourceFiles) {
 
         Scanner fileScanner = new Scanner(sourceFile);
 

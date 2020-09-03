@@ -4,6 +4,16 @@ D=M
 @R14
 M=D
 
+// RET = *(FRAME-5)
+@5
+D=A
+@R14
+A=M-D
+A=M
+D=A
+@R15
+M=D
+
 // ARG = pop(top of stack)
 @SP
 A=M-1
@@ -50,9 +60,7 @@ D=M
 @LCL
 M=D
 
-// RETURN ADDRESS = *(FRAME-5)
-@R14
-M=M-1
-A=M
+// GOTO RETURN ADDRESS
+@R15
 A=M
 0;JMP

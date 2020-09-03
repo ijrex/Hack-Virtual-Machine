@@ -16,6 +16,7 @@ public class CommandLib {
   }
 
   private void assignCommandDescriptions() {
+    commands.put("init_sys", new InitCommand("sys_init.asm"));
     commands.put("init_arithmetic", new InitCommand("arithmetic_lib.asm"));
 
     commands.put("push", new PushCommand(new String[] { "push", "LOCATION", "VALUE" }));
