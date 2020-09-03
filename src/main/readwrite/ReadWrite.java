@@ -46,6 +46,9 @@ public class ReadWrite {
 
         currentFile++;
       }
+
+      fileWriter.write(commandLib.lib());
+
       fileWriter.close();
 
       System.out.println(outputFile);

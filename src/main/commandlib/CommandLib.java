@@ -16,8 +16,9 @@ public class CommandLib {
   }
 
   private void assignCommandDescriptions() {
-    commands.put("init_sys", new InitCommand("sys_init.asm"));
-    commands.put("init_arithmetic", new InitCommand("arithmetic_lib.asm"));
+    commands.put("init_sys", new TemplateCommand("sys_init.asm"));
+
+    commands.put("lib_arithmetic", new TemplateCommand("lib_arithmetic.asm"));
 
     commands.put("push", new PushCommand(new String[] { "push", "LOCATION", "VALUE" }));
     commands.put("pop", new PopCommand(new String[] { "pop", "LOCATION", "VALUE" }));
@@ -43,12 +44,15 @@ public class CommandLib {
   }
 
   public String init(boolean boostrap) {
-    String init = handleCommand(commands.get("init_arithmetic"), null, null);
+    if (boostrap) {
+      return handleCommand(commands.get("init_sys"), null, null);
+    } else {
+      return "";
+    }
+  }
 
-    if (boostrap)
-      init += handleCommand(commands.get("init_sys"), null, null);
-
-    return init;
+  public String lib() {
+    return handleCommand(commands.get("lib_arithmetic"), null, null);
   }
 
   public String write(String input, String functionName) {
