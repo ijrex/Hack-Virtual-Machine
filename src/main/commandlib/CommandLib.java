@@ -43,7 +43,8 @@ public class CommandLib {
   }
 
   public String init() {
-    return handleCommand(commands.get("init_arithmetic"), null, null);
+    return handleCommand(commands.get("init_arithmetic"), null, null)
+        + handleCommand(commands.get("init_sys"), null, null);
   }
 
   public String write(String input, String functionName) {

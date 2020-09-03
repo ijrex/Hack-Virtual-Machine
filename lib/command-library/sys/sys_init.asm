@@ -1,36 +1,62 @@
-// // STACK POINTER
-// @256
-// D=A
-// @SP
-// M=D
+// SET STACK POINTER
+@256
+D=A
+@SP
+M=D
 
-// // NULLIFY RETURN ADDRESS, LOCAL, ARG
-// @SP
-// AM=M+1
-// A=A-1
-// M=0
+// PUSH RETURN ADDRESS
+@SYS_BOOTSTRAP
+D=A
+@SP
+AM=M+1
+A=A-1
+M=D
 
-// @SP
-// AM=M+1
-// A=A-1
-// M=0
+//SET LCL
+@LCL
+MD=0
+@SP
+AM=M+1
+A=A-1
+M=D
 
-// @SP
-// AM=M+1
-// A=A-1
-// M=0
+//SET ARG
+@ARG
+MD=0
+@SP
+AM=M+1
+A=A-1
+M=D
 
-// // SET THIS & THAT BASE
-// @3000
-// D=M
-// @SP
-// AM=M+1
-// A=A-1
-// M=D
+// PUSH THIS
+@THIS
+MD=0
+@SP
+AM=M+1
+A=A-1
+M=D
 
-// @4000
-// D=M
-// @SP
-// AM=M+1
-// A=A-1
-// M=D
+// PUSH THAT
+@THAT
+MD=0
+@SP
+AM=M+1
+A=A-1
+M=D
+
+// REPOSITION ARG SP-5
+@SP
+D=M
+@5
+D=D-A
+@ARG
+M=D
+
+// REPOSITION LCL
+@SP
+D=M
+@LCL
+M=D
+
+// DECLARE RETURN ADDRESS
+(SYS_BOOTSTRAP)

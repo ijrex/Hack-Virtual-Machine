@@ -7,7 +7,7 @@ class VMAssembler {
 
 	public static void main(String[] args) {
 
-		LoadFiles files = new LoadFiles("test-files/FunctionCalls/NestedCall", "vm");
+		LoadFiles files = new LoadFiles("test-files/FunctionCalls/FibonacciElement", "vm");
 
 		CommandLib commandLib = new CommandLib();
 
