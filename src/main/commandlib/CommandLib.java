@@ -42,9 +42,13 @@ public class CommandLib {
 
   }
 
-  public String init() {
-    return handleCommand(commands.get("init_arithmetic"), null, null)
-        + handleCommand(commands.get("init_sys"), null, null);
+  public String init(boolean boostrap) {
+    String init = handleCommand(commands.get("init_arithmetic"), null, null);
+
+    if (boostrap)
+      init += handleCommand(commands.get("init_sys"), null, null);
+
+    return init;
   }
 
   public String write(String input, String functionName) {

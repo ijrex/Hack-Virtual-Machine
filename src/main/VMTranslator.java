@@ -11,7 +11,7 @@ class VMAssembler {
 
 		CommandLib commandLib = new CommandLib();
 
-		ReadWrite.main(files, commandLib);
+		ReadWrite.main(files, commandLib, true);
 
 	}
 }

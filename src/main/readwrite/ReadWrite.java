@@ -13,7 +13,7 @@ import commandlib.CommandLib;
 import readwrite.util.*;
 
 public class ReadWrite {
-  public static void main(LoadFiles files, CommandLib commandLib) {
+  public static void main(LoadFiles files, CommandLib commandLib, boolean bootstrap) {
 
     ArrayList<File> sourceFiles = Util.getOrderedFiles(files.getFiles());
 
@@ -24,7 +24,7 @@ public class ReadWrite {
 
       FileWriter fileWriter = new FileWriter(outputFile, false);
 
-      fileWriter.write(commandLib.init());
+      fileWriter.write(commandLib.init(bootstrap));
 
       for (File sourceFile : sourceFiles) {
 
