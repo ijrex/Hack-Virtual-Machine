@@ -16,7 +16,7 @@ public class CommandLib {
   }
 
   private void assignCommandDescriptions() {
-    commands.put("init_sys", new TemplateCommand("sys_init.asm"));
+    commands.put("bootstrap", new TemplateCommand("bootstrap.asm"));
 
     commands.put("lib_arithmetic", new TemplateCommand("lib_arithmetic.asm"));
 
@@ -45,7 +45,7 @@ public class CommandLib {
 
   public String init(boolean boostrap) {
     if (boostrap) {
-      return handleCommand(commands.get("init_sys"), null, null);
+      return handleCommand(commands.get("bootstrap"), null, null);
     } else {
       return "";
     }
