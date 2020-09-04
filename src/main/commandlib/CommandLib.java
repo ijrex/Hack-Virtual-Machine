@@ -20,8 +20,8 @@ public class CommandLib {
 
     commands.put("lib_arithmetic", new TemplateCommand("lib_arithmetic.asm"));
 
-    commands.put("push", new PushCommand(new String[] { "push", "LOCATION", "VALUE" }));
-    commands.put("pop", new PopCommand(new String[] { "pop", "LOCATION", "VALUE" }));
+    commands.put("push", new PushCommand(new String[] { "push", "LOCATION", "VALUE" }, true));
+    commands.put("pop", new PopCommand(new String[] { "pop", "LOCATION", "VALUE" }, true));
 
     commands.put("add", new ArithmeticCommand("add"));
     commands.put("and", new ArithmeticCommand("and"));
