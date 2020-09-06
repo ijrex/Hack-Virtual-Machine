@@ -30,7 +30,7 @@ public class ReadWrite {
 
         Scanner fileScanner = new Scanner(sourceFile);
 
-        String functionName = Util.getFileName(sourceFile.getName());
+        String className = Util.getFileName(sourceFile.getName());
 
         while (fileScanner.hasNextLine()) {
           String line = fileScanner.nextLine();
@@ -38,7 +38,7 @@ public class ReadWrite {
           line = Util.trimExcess(line);
 
           if (line.length() > 0) {
-            fileWriter.write(commandLib.write(line, functionName));
+            fileWriter.write(commandLib.write(line, className));
           }
         }
 

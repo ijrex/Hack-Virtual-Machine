@@ -2,12 +2,12 @@ package commandlib.command;
 
 public class LabelCommand extends Command {
 
-  public LabelCommand(String[] argVars, Boolean _isFunctionDept) {
-    super(argVars, _isFunctionDept);
+  public LabelCommand(String[] argVars, Boolean _isClassDept) {
+    super(argVars, _isClassDept);
   }
 
-  public String[] write(String[] args, int linePos, String functionName) {
-    String parsedOutput = "(" + functionName + "$" + args[1] + ")";
+  public String[] write(String[] args, int linePos, String className) {
+    String parsedOutput = "(" + className + "$" + args[1] + ")";
 
     String[] parsedOutputArr = parsedOutput.split("\n");
 

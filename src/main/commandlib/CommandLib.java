@@ -55,23 +55,23 @@ public class CommandLib {
     return handleCommand(commands.get("lib_arithmetic"), null, null);
   }
 
-  public String write(String input, String functionName) {
+  public String write(String input, String className) {
     String[] args = input.split(" ");
 
     String commandType = args[0];
     Command command = commands.get(commandType);
 
-    return handleCommand(command, args, functionName);
+    return handleCommand(command, args, className);
   }
 
-  private String handleCommand(Command command, String[] args, String functionName) {
+  private String handleCommand(Command command, String[] args, String className) {
 
     String[] output;
 
-    if (!command.isFunctionDept) {
+    if (!command.isClassDept) {
       output = command.write(args, linePos);
     } else {
-      output = command.write(args, linePos, functionName);
+      output = command.write(args, linePos, className);
     }
 
     for (String line : output) {
