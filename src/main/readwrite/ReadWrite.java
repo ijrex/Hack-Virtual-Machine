@@ -13,7 +13,7 @@ import commandlib.CommandLib;
 import readwrite.util.*;
 
 public class ReadWrite {
-  public static void main(LoadFiles files, CommandLib commandLib) {
+  public static void main(LoadFiles files, CommandLib commandLib, boolean bootstrap) {
 
     ArrayList<File> sourceFiles = Util.getOrderedFiles(files.getFiles());
 
@@ -24,13 +24,9 @@ public class ReadWrite {
 
       FileWriter fileWriter = new FileWriter(outputFile, false);
 
-      for (File sourceFile : sourceFiles) {
+      fileWriter.write(commandLib.init(bootstrap));
 
-        // TO DO: CHANGE INIT COMMANDS TO FUNCTIONS
-        if (currentFile == 1 || sourceFiles.size() == 1) {
-          fileWriter.write(commandLib.init());
-        }
-        //
+      for (File sourceFile : sourceFiles) {
 
         Scanner fileScanner = new Scanner(sourceFile);
 
@@ -50,6 +46,9 @@ public class ReadWrite {
 
         currentFile++;
       }
+
+      fileWriter.write(commandLib.lib());
+
       fileWriter.close();
 
       System.out.println(outputFile);

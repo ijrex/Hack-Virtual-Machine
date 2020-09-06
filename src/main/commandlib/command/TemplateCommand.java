@@ -2,9 +2,9 @@ package commandlib.command;
 
 import commandlib.command.util.*;
 
-public class InitCommand extends Command {
+public class TemplateCommand extends Command {
 
-  public InitCommand(String templateFile) {
+  public TemplateCommand(String templateFile) {
     super(templateFile);
     output = Util.loadTemplateFile(templateFile);
   }

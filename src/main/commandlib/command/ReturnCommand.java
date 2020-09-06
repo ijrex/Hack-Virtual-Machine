@@ -11,7 +11,7 @@ public class ReturnCommand extends Command {
 
   }
 
-  public String[] write(String[] args, int linePos, String functionName) {
+  public String[] write(String[] args, int linePos) {
     String parsedOutput = output;
 
     String[] parsedOutputArr = parsedOutput.split("\n");

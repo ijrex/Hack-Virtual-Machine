@@ -30,17 +30,18 @@ public class Parse {
     return parsedStr;
   }
 
-  public static String staticArgs(String[] args, String str) {
-    return str.replaceAll("\\$S\\$_STATIC_\\$S\\$", "vmfilename." + args[2]);
+  public static String staticArgs(String[] args, String str, String functionName) {
+    return str.replaceAll("\\$S\\$_STATIC_\\$S\\$", functionName + "." + args[2]);
   }
 
-  public static String[] pushPop(String templateFile, String[] args, String[] argVars, MemoryLocation pushPopType) {
+  public static String[] pushPop(String templateFile, String[] args, String[] argVars, MemoryLocation pushPopType,
+      String functionName) {
     String parsedOutput = "";
 
     parsedOutput = args(args, argVars, templateFile);
 
     if (pushPopType == MemoryLocation.STATIC) {
-      parsedOutput = staticArgs(args, parsedOutput);
+      parsedOutput = staticArgs(args, parsedOutput, functionName);
     }
 
     String[] parsedOutputArr = parsedOutput.split("\n");

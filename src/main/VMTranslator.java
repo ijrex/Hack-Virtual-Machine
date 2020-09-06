@@ -7,11 +7,11 @@ class VMAssembler {
 
 	public static void main(String[] args) {
 
-		LoadFiles files = new LoadFiles("test-files/FunctionCalls/SimpleFunction", "vm");
+		LoadFiles files = new LoadFiles("test-files/FunctionCalls/StaticsTest", "vm");
 
 		CommandLib commandLib = new CommandLib();
 
-		ReadWrite.main(files, commandLib);
+		ReadWrite.main(files, commandLib, true);
 
 	}
 }
