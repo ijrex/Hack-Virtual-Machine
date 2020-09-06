@@ -10,35 +10,35 @@ public class PushCommand extends Command {
   protected String pushBase;
   protected String pushStatic;
 
-  public PushCommand(String[] argVars, Boolean _isFunctionDept) {
-    super(argVars, _isFunctionDept);
+  public PushCommand(String[] argVars, Boolean _isClassDept) {
+    super(argVars, _isClassDept);
     pushConstant = Util.loadTemplateFile("push-constant.asm");
     pushLocation = Util.loadTemplateFile("push-location.asm");
     pushBase = Util.loadTemplateFile("push-base.asm");
     pushStatic = Util.loadTemplateFile("push-static.asm");
   }
 
-  public String[] write(String[] args, int linePos, String functionName) {
+  public String[] write(String[] args, int linePos, String className) {
     String[] parsedOutput = {};
 
     MemoryLocation pushType = MemoryLocation.getType(args[1]);
 
     switch (pushType) {
       case CONSTANT:
-        parsedOutput = Parse.pushPop(pushConstant, args, argVars, pushType, functionName);
+        parsedOutput = Parse.pushPop(pushConstant, args, argVars, pushType, className);
         break;
       case ARGUMENT:
       case LOCAL:
       case THIS:
       case THAT:
-        parsedOutput = Parse.pushPop(pushLocation, args, argVars, pushType, functionName);
+        parsedOutput = Parse.pushPop(pushLocation, args, argVars, pushType, className);
         break;
       case TEMP:
       case POINTER:
-        parsedOutput = Parse.pushPop(pushBase, args, argVars, pushType, functionName);
+        parsedOutput = Parse.pushPop(pushBase, args, argVars, pushType, className);
         break;
       case STATIC:
-        parsedOutput = Parse.pushPop(pushStatic, args, argVars, pushType, functionName);
+        parsedOutput = Parse.pushPop(pushStatic, args, argVars, pushType, className);
         break;
       default:
         break;

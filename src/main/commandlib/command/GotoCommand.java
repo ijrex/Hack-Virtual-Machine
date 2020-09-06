@@ -7,14 +7,14 @@ public class GotoCommand extends Command {
   protected String goTo;
   protected String ifGoTo;
 
-  public GotoCommand(String[] argVars, Boolean _isFunctionDept) {
-    super(argVars, _isFunctionDept);
+  public GotoCommand(String[] argVars, Boolean _isClassDept) {
+    super(argVars, _isClassDept);
 
     goTo = Util.loadTemplateFile("goto.asm");
     ifGoTo = Util.loadTemplateFile("if-goto.asm");
   }
 
-  public String[] write(String[] args, int linePos, String functionName) {
+  public String[] write(String[] args, int linePos, String className) {
     String parsedOutput;
 
     if (this.name == "goto") {
@@ -23,7 +23,7 @@ public class GotoCommand extends Command {
       parsedOutput = ifGoTo;
     }
 
-    String location = functionName + "\\$" + args[1];
+    String location = className + "\\$" + args[1];
 
     String regex = "\\$V\\$_LABEL_\\$V\\$";
     parsedOutput = parsedOutput.replaceAll(regex, location);

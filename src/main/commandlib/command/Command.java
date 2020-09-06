@@ -5,14 +5,14 @@ public abstract class Command {
   protected String output;
   protected String[] argVars = new String[3];
 
-  public Boolean isFunctionDept = false;
+  public Boolean isClassDept = false;
 
   public Command(String name) {
     this.name = name;
   }
 
-  public Command(String name, Boolean _isFunctionDept) {
-    this.isFunctionDept = true;
+  public Command(String name, Boolean _isClassDept) {
+    this.isClassDept = true;
     this.name = name;
   }
 
@@ -20,8 +20,8 @@ public abstract class Command {
     this.init(_argVars);
   }
 
-  public Command(String[] _argVars, Boolean _isFunctionDept) {
-    this.isFunctionDept = true;
+  public Command(String[] _argVars, Boolean _isClassDept) {
+    this.isClassDept = true;
     this.init(_argVars);
   }
 
@@ -37,7 +37,7 @@ public abstract class Command {
     return output.split("\n");
   }
 
-  public String[] write(String[] args, int linePos, String functionName) {
+  public String[] write(String[] args, int linePos, String className) {
     return output.split("\n");
   }
 }
