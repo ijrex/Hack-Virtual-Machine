@@ -1,72 +1,83 @@
-# Hack-Virtual-Machine
+# Hack Virtual Machine
 
-## Converts programmes written in the Hack Virtual Machine (VM) language to Hack Machine Assembly (ASM) code designated for the Hack hardware platform.
+## Parses one or more Hack Virtual Machine (.vm) files in a given directory and writes a single Hack Machine Assembly (.asm) file to the same location.
 
-This personal project was created as an accompaniment for Chapters 7 and 8 of the book The Elements of Computing Systems. The aforementioned should be referenced for full specification of the Hack VM and Hack ASM languages. 
+This personal project was created as an accompaniment for Chapters 7 and 8 of the book [The Elements of Computing Systems](https://www.nand2tetris.org/course). The aforementioned should be referenced for the full specification of the Hack VM and Hack ASM languages. The Hack ASM code runs on the Hack Hardware platform.
 
-—
+---
 
-Purpous:
+# Project Structure
 
-Takes one or more Hack VM (.vm) files as input and outputs a single Hack ASM (.asm) file to the same directory.
+## VM Assembler
 
-Project Structure:
+#### The `VMAssembler` class serves as the software entry point
 
-VMTranslator: Software entry point
+Loads Hack VM file(s), declares Command Library and initiates file parsing and writing (explained in detail below).
 
-Loads VM file, creates CommandLib (described below) and initiates Read/Write  (described below).
+### Turning Hack VM (.vm) into Hack ASM (.asm)
 
-—
+Takes one or more Hack VM (.vm) files as input, the `readwrite` package outputs a single Hack ASM (.asm) file ready to run on the Hack hardware platform: 
 
-#commandlib package 
+- Bootstraps pre-defined Hack ASM code necessary for programmes to start-up (assigns memory locations etc). Because some tests do not require the bootstrap code, this feature can be disabled on the `readwrite` constructor.
 
-## Defines Hack VM language commands
+- Parses the Hack VM code in the source file(s)
+	- Makes sure that `sys.vm` is the first Hack VM file to be handled by the programme.
+	- Trims comments and translates individual Hack VM commands into blocks of ASM code.
 
-- Defines all commands in the Hack VM Language using templates from the Command package.
+- Append any Libraries to the end of the computer program which are required for certain commands to run.
 
-## Returns commands and other chunks of assembly output as strings.
+## Command Library
 
-- CommandLib
+The Command Library defines all Hack VM commands and returns chunks of assembly output as strings.
 
-VM commands to be parsed into ASM code. All VM commands are defined in the `assignCommandDescriptions` method and are described using the nested Commands package.  
+### The `commandlib` package
 
-Commands are loaded into the `commands` map by type and syntax:
+This package serves two main purpouses:
 
-`commands.put("push", new PushCommand(new String[] { "push", "LOCATION", "VALUE" }, true));
+#### 1. Defining Commands
+
+Commands are defined through the inbuilt `commands` map by type and syntax:
+
+`commands.put("push", new PushCommand(new String[] { "push", "LOCATION", "VALUE" }, true));`
 
 In the above example: 
-- `push` is referenced in the map by its name
-- The string array describes `push`’s expected arguments. e.g. { "push", "LOCATION", "VALUE" } might be seen in VM as `push constant 999`. Where relevant, args should match the variables used in their .asm template file (described below).
-- Certain commands need to know the class name of the .vm file being parsed. This information can be passed by appending `true` in the constructor.
+- `push` is the key the command will be referenced by.
+- The String array describes the `push` command's expected arguments. e.g. `{ "push", "LOCATION", "VALUE" }` might be seen in Hack VM as `push constant 999`. Where relevant, the described arguments should match the variables used in their template files (detailed below).
+- Certain commands need to know the class name of the Hack VM file being parsed. This information can be forwarded by appending `true` in the constructor.
 
-### How commands get written
+##### 2. Returning Hack ASM Code
 
-- Write (`write`)
-VM commands parsed while traversing through the .vm file
+Outputs formatted blocks of Hack ASM code. All VM commands are defined in the `assignCommandDescriptions` method and are described using the nested `commands` package. Blocks of Hack ASM are returned using the following methods.
 
-- Bootstrap code (`init`)
-Chunks of code to be ran prior to any compiled .vm code. 
+- **Write** (`write`): VM commands which are parsed while traversing through the Hack VM files
 
-- Libraries (`lib `)
-Libs contain chunks of reusable code which don’t take on the complex stack requirements of functions. Commands described in the command library may yield using Libs.
+- **Bootstrap code** (`init`): Chunks of predefined code to be ran prior to any file parsing 
 
-The specific Lib for this project is the Arithmetic Library. For example, the VM command `neg` is parsed in a way that the assembly output will jump to the location of the `neg` command in the Arithmetic Library computer program, perform its operation on the stack and jump back to where it left off.  
+- **Libraries** (`lib`): 
+Libraries hold blocks of reusable code which don't require the complex stack requirements of functions. Some commands may point to specific Libraries in order to operate. For example, the Hack ASM output of the `add` command simply contains a pointer to the relevent section of the Arithmetic Library; when the computer program sees an `add` command, it will jump to the correct location in the Arithmetic Library, perform its operation on the stack and then jump back to where it left off.  
 
+### The `commandlib.command` package
 
-# commandlib.command package
+Templates for all Hack VM to ASM commands are defined in this nested package using the abstract `Command` class. Hack VM code can be parsed in different ways but the `write` method must always return a String array holding individual lines of assembly code, this is essential for the `commandlib` package to keep track of the line number of the computer program it is writing.
 
-Templates for all VM commands are defined in this package using the abstract `Command` class. VM code can be parsed in different ways but the `write` method must always return a String Array holding individual lines of assembly code, this is essential for the `commandlib` package to keep track of the output file’s line number.
+#### The `Command` Classes
 
-## Command Classes
+Most commands described in the `commandlib.command` classes use Hack ASM (.asm) template files. These templates use placeholder variables intended to be replaced with command specific arguments at compile time. 
 
-Most `commandlib.command` classes use .asm template files to be further parsed with specific arguments. 
+**Using the `FunctionCommand` command as an example:**
 
-Using the `FunctionCommand` command as an example. The .vm file supplies something like `function Main.fibonacci 3`, where the virtual machine sees arg[1] as `Main.fibonacci ` and arg[2] as `3`
+The Hack VM file imparts the command `function Main.fibonacci 3`. First of all, the Virtual Machine recognises this is a `function` command from arg[0]. Because of the command format described in the `FunctionCommand` constructor, it expects two arguments; arg[1] which is in this case `Main.fibonacci`; and arg[2] which happens to be `3`.
 
-1. On creation, the constructor has already loaded an asm file called `function-locals.asm` into the class’s `output` variable
-2. The `write` method handles the arguments appropriately.
-	- Injecting arg[1] into a .asm label command
+1. On creation, the `FunctionCommand` constructor has already loaded a Hack ASM file called `function-locals.asm` into the class’s `output` variable
+2. The `write` method handles the given arguments appropriately, replacing the variables in the `output` variable: 
+	- Injecting arg[1] into a Hack ASM label command
 	- Performing a regex search on the template file to replace all instances of `$V$_VALUE_$V$` with arg[2] 
+
+## The `commandlib.command.memorylocation` package
+
+Certain pointers have assigned memory locations on the Hack hardware platform. As an example, `local` is important enough to have a designated symbol in the Hack ASM language (`LCL`), `temp` doesn’t have its own value but is stored in `R5` (RAM[5]).
+
+This package stores all memory locations/bases as constants, they can be parsed or referenced using the provided methods.
 
 ## Template files 
 
@@ -76,52 +87,45 @@ It should be noted that the .asm template files can run on the Hack CPU emulator
 
 To make life easier for the developer, a common syntax is recommended for template file variables. The prefix and suffix are outlined below, the middle text should be uppercase and informative to the developer of the intended output.
 
-$V$
+### `$V$`
 
-A user-defined variable argument to be parsed by the Virtual machine. These should match the arguments described in the `assignCommandDescriptions` method of the `commandlib` package.
+A user-defined variable argument to be parsed by the Virtual Machine. These should match the arguments described in the `assignCommandDescriptions` method of the `commandlib` package.
 
-e.g.
-
-$V$_VALUE_$V$
-$V$_LOCATION_$V$
+e.g. `$V$_VALUE_$V$`, `$V$_LOCATION_$V$`
 
 
-$C$
+### `$C$`
 
-A non user-defined variable argument to be parsed by the Virtual machine: In the below example, the END_OF_BLOCK isn’t an argument explicitly defined in the VM code, but is required by the parser to allocate a specific memory address.
+A non user-defined variable argument to be parsed by the Virtual Machine: In the below example, `END_OF_BLOCK` isn’t an argument explicitly given from a command in the VM code; it is however, required to allocate a specific memory address in outputted Hack ASM code.
 
-e.g.
+e.g. `$C$_END_OF_BLOCK_$C$`
 
-@$C$_END_OF_BLOCK_$C$
+### `$S$`
 
-$S$
+A static variable name. These are not explicitly provided by the Hack VM commands, but rather the name of the Hack VM file itself (also the class name). Further reading on static variables here.
 
-A static variable name. These are not explicitly defined in the VM code but rather the name of the .vm file itself (which is also the class name). Further reading on static variables here.
+e.g. `$S$_STATIC_$S$`
 
-e.g. 
+### `$L$`
 
-$S$_STATIC_$S$
-
-$L$
-
-Used to point to Libs. As an example, the following is replaced to point to a specific command in the Arithmetic Lib; the `add` command template will be parsed: `@$L$_ARITHMETIC_LIB_$L$` > `@ARITHMETIC_ADD`
-
-e.g. 
-
-$L$_ARITHMETIC_LIB_$L$
-
-## `commandlib.command.memorylocation`
-
-Certain pointers have specific memory locations on the Hack hardware platform. As an example, `local` is significant enough to have a designated value in the hack assembly language (`LCL`), `temp` doesn’t have its own value but is stored in `R5` (RAM[5]).
-
-This package stores all memory locations/bases as constants and can be parsed/referenced using the provided methods.
+Used for Libraries. In the below example, the `add` command using the `ArithmeticCommand` class replaces the variable to point the correct programme location in the Arithmetic Library.
+ 
+ e.g. `@$L$_ARITHMETIC_LIB_$L$` gets replaced with `@ARITHMETIC_ADD`
 
 
+## `loadfile` package
+
+This package contains two utility classes, `loadfile` and `loadfiles`. These packages are required to load Hack VM files to be parsed as well as ASM template files.
 
 
+LoadFile:
 
+Search for and load an individual file within the project or a specified directory. File extention type may be specified. 
 
+LoadFiles:
 
+Load all files of a specific type within a specified directory.
 
+## Tests
 
-
+Unit tests can be found in the /tests directory and run on the Nand2Tetris CPU Emulator https://www.nand2tetris.org/software.
