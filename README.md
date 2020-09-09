@@ -12,19 +12,19 @@ Even though it's unlikely that the Hack VM or ASM languages will change in the f
 
 ## VM Assembler
 
-#### The  class serves as the software entry point
+#### The `VMAssembler` class serves as the software entry point.
 
-Loads Hack VM file(s), declares the Command Library and initiates file parsing and writing (explained in detail below).
+Loads Hack VM source file(s), initiates the Command Library and begins file parsing and writing (explained in detail below).
 
 ## Parsing & writing files
 
-The `VMAssembler` takes one or more Hack VM (.vm) files as input. Subsequently, the `readwrite` package in called which  parses the VM code and outputs a single Hack ASM (.asm) file ready to run on the Hack hardware platform.
+The `VMAssembler` takes one or more Hack VM (.vm) files as input. Subsequently, the `readwrite` package is called which  parses the VM code and outputs a single Hack ASM (.asm) file ready to run on the Hack hardware platform.
 
 The key steps `readwrite` takes to create the Hack ASM output are as follows: 
 
 - Bootstrap the pre-built Hack ASM code necessary for programmes to start (assign memory locations etc). Because some tests do not require the bootstrap code, this feature can be disabled on the `readwrite` constructor.
 
-- Translate the Hack VM source files and write ASM code to the output file:
+- Translate the Hack VM source files and write Hack ASM code to the output file:
 	- Ensure that `sys.vm` is the first Hack VM file to be handled by the programme.
 	- March through the Hack VM source files, translating each command line-by-line into blocks of Hack ASM code.
 	- Trim all comments and whitespace.
@@ -41,7 +41,7 @@ This package serves two key purposes:
 
 #### 1. Defining Commands
 
-Hack VM commands are defined in the built-in `commands` map by type and syntax.
+Hack VM commands are stored to the built-in `commands` map by type and syntax.
 
 `commands.put("push", new PushCommand(new String[] { "push", "LOCATION", "VALUE" }, true));`
 
@@ -64,7 +64,7 @@ Libraries hold blocks of reusable code which don't require the complex stack req
 
 ### The `commandlib.command` package
 
-Parsing functionality for all Hack VM commands are defined in this nested package using the abstract `Command` class. The procedure to translate individual commands varies by class, however, the `write` method must always return a String array holding individual lines of ASM code; this String Array is essential for the `commandlib` package to keep track of the line number of the computer program.
+Parsing functionality for all Hack VM commands gets defined in this nested package using the abstract `Command` class. The procedure to translate individual commands varies by class, however, the `write` method must always return a String array holding individual lines of ASM code; this String Array is essential for the `commandlib` package to keep track of the line number of the computer program.
 
 #### The `Command` Classes
 
@@ -79,13 +79,13 @@ The file scanner comes accross the command `function Main.fibonacci 3`. First of
 	- Injecting `arg[1]` into a Hack ASM label command.
 	- Performing a regex search on the template file to replace all instances of `$V$_VALUE_$V$` with the value of `arg[2]`.
 
-## The `commandlib.command.memorylocation` package
+#### The `commandlib.command.memorylocation` package
 
 Specific pointers require assigned memory locations on the Hack hardware platform. As an example, `local` is important enough to have a designated symbol in the Hack ASM language (`LCL`), `temp` doesn’t have its own symbol, but is always saved at `R5` (`RAM[5]`).
 
 This package saves all memory locations/bases as constants, they can be parsed or referenced using their methods.
 
-## Template files 
+#### Template files 
 
 Template files are saved outside of the main project in the `/lib/command-library` directory and should be fetched using the `loadTemplateFile` util. Searches for template files recursive; the folder structure inside of  `/lib/command-library` exists to aid the developer but is not required by this method. 
 
@@ -93,35 +93,34 @@ It should be noted that the Hack ASM (.asm) template files can run on the Hack C
 
 Template files can use variables which will be replaced at compile time. To make life easier for the developer, a common syntax is recommended for template file variables. Prefixes and suffixes are outlined below, the middle text should be uppercase and informative to the developer of the intended output.
 
-### `$V$`
+##### `$V$`
 
 A user-defined variable argument to be parsed by the Virtual Machine. These should match the arguments described in the `assignCommandDescriptions` method of the `commandlib` package.
 
 e.g. `$V$_VALUE_$V$`, `$V$_LOCATION_$V$`
 
-
-### `$C$`
+##### `$C$`
 
 A non user-defined variable argument to be parsed by the Virtual Machine: In the below example, `END_OF_BLOCK` isn’t an argument explicitly given from a command in the Hack VM code; it is however, required to allocate a specific memory address in outputted Hack ASM code.
 
 e.g. `$C$_END_OF_BLOCK_$C$`
 
-### `$S$`
+##### `$S$`
 
 A static variable name. These are not explicitly given by the Hack VM commands, rather the name of the Hack VM file itself (also the class name). Further reading on Hack VM static variables [here](https://www.nand2tetris.org/course).
 
 e.g. `$S$_STATIC_$S$`
 
-### `$L$`
+##### `$L$`
 
 Used for libraries. In the below example, the `add` command using the `ArithmeticCommand` class replaces the variable to point the correct programme location in the Arithmetic Library.
  
  e.g. `@$L$_ARITHMETIC_LIB_$L$` gets replaced with `@ARITHMETIC_ADD`
 
 
-## `loadfile` package
+## Loading files
 
-This package contains two utility classes, `loadfile` and `loadfiles`. These packages are required to load the source Hack VM files as well as ASM template files.
+The `loadfile` package contains two utility classes, `LoadFile` and `LoadFiles`. These packages are required to load the source Hack VM files as well as ASM template files.
 
 `LoadFile`: Search for, and load an individual file within the project folder or a specified directory. File extention type may also be set. 
 
