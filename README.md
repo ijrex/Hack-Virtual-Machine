@@ -89,7 +89,7 @@ This package stores all memory locations/bases as constants and can be accessed 
 
 ### Template files 
 
-Template files used by the `commandlib.commands` class can be found outside of the main project in `/lib/command-library` and should be fetched using the `loadTemplateFile` util. Searches for template files recursive; the directory structure inside of  `/lib/command-library` exists to aid the developer but is not required by `loadTemplateFile`. 
+Template files used by the `commandlib.commands` class can be found outside of the main project in `/lib/command-library` and should be fetched using the `loadTemplateFile` util. Searches for template files is recursive; the directory structure inside of  `/lib/command-library` exists to aid the developer but is not required by `loadTemplateFile`. 
 
 It should be noted that the Hack ASM (.asm) template files run on the Hack CPU emulator and therefore, can have their own unit tests.
 
@@ -98,8 +98,6 @@ Most template files use variables which are replaced at compile time. To make li
 #### `$V$`
 
 A user-defined variable argument to be parsed by the Virtual Machine. These should match the arguments described in the `assignCommandDescriptions` method of the `commandlib` package. 
-
-**e.g.**
 
 ```java
 // CommandLib.java
@@ -121,13 +119,11 @@ A=A+D
 
 A non user-defined variable argument to be parsed by the Virtual Machine: In the below example, `END_OF_BLOCK` isn’t an argument explicitly given from a command in the Hack VM code; it is however, required to allocate a specific memory address in outputted Hack ASM code.
 
-**e.g.**
-
 ```
 // lib/command-library/arithmetic/arithmetic.asm
 
-// The below variable is replaced at complile time with one
-// more than the line number of the end of this block of code
+// The below variable is replaced at complile time with the
+// value of the line number for end of this block of code +1
 
 @$C$_END_OF_BLOCK_$C$ 
 D=A
@@ -138,8 +134,6 @@ D=A
 #### `$S$`
 
 A static variable name. These are not explicitly given by the Hack VM commands, rather the name of the Hack VM file itself (also the class name). Further reading on Hack VM static variables [here](https://www.nand2tetris.org/course).
-
-**e.g.**
 
 ```
 // lib/command-library/push/push-static.asm
@@ -156,8 +150,6 @@ M=D
 #### `$L$`
 
 Used for libraries. In the below example, the `add` command using the `ArithmeticCommand` class replaces the variable to point the correct computer programme location in the Arithmetic Library. 
-
-**e.g.**
 
 ```
 // lib/command-library/arithmetic/arithmetic.asm
