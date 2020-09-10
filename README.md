@@ -83,7 +83,7 @@ The file scanner comes accross the command `function Main.fibonacci 3`. First of
 
 #### The `commandlib.command.memorylocation` package
 
-Specific pointers make use assigned memory locations on the Hack hardware platform. As an example, `local` is important enough to have a designated symbol in the Hack ASM language (`LCL`), `temp` doesn’t have its own symbol, but is always saved at `R5` (`RAM[5]`).
+Specific pointers make use of assigned memory locations on the Hack hardware platform. As an example, `local` is important enough to have a designated symbol in the Hack ASM language (`LCL`), `temp` doesn’t have its own symbol, but is always saved at `R5` (`RAM[5]`).
 
 This package stores all memory locations/bases as constants and can be accessed through their given methods.
 
