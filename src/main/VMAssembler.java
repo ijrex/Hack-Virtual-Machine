@@ -7,7 +7,7 @@ class VMAssembler {
 
 	public static void main(String[] args) {
 
-		LoadFiles files = new LoadFiles(args[0], "vm");
+		LoadFiles files = new LoadFiles("args[0]", "vm");
 
 		CommandLib commandLib = new CommandLib();
 
