@@ -80,7 +80,7 @@ public class LoadFile {
         path = dir;
       }
 
-      File searchDir = new File(System.getProperty("user.dir"), path);
+      File searchDir = new File(path);
 
       this.searchForSourceFile(searchFiles, searchDir, recursive);
 
