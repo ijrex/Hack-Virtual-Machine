@@ -7,7 +7,7 @@ public class CallCommand extends Command {
   public CallCommand(String[] argVars) {
     super(argVars);
 
-    output = Util.loadTemplateFile("call.asm");
+    output = Util.loadTemplateFile("./lib/command-library/function/call.asm");
 
   }
 

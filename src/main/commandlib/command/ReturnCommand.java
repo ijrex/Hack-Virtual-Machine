@@ -7,7 +7,7 @@ public class ReturnCommand extends Command {
   public ReturnCommand(String name) {
     super(name);
 
-    output = Util.loadTemplateFile("return.asm");
+    output = Util.loadTemplateFile("./lib/command-library/function/return.asm");
 
   }
 
