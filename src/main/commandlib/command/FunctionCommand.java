@@ -6,7 +6,7 @@ public class FunctionCommand extends Command {
 
   public FunctionCommand(String[] argVars) {
     super(argVars);
-    output = Util.loadTemplateFile("function-locals.asm");
+    output = Util.loadTemplateFile("./lib/command-library/function/function-locals.asm");
   }
 
   public String[] write(String[] args, int linePos) {

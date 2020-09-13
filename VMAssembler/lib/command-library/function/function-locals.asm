@@ -1,0 +1,7 @@
+@$V$_VALUE_$V$
+D=A
+@LCL
+A=M+D
+M=0
+@SP
+M=M+1

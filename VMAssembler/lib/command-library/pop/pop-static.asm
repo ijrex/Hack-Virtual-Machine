@@ -1,0 +1,5 @@
+@SP
+AM=M-1
+D=M
+@$S$_STATIC_$S$
+M=D

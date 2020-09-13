@@ -1,6 +1,5 @@
 package commandlib.command.util;
 
-import loadfile.LoadFile;
 import java.io.File;
 import java.io.IOException;
 import java.util.Scanner;
@@ -18,9 +17,7 @@ public class Util {
   }
 
   public static String loadTemplateFile(String templateFile) {
-    String type = "asm";
-    LoadFile file = new LoadFile(templateFile, type, "../../lib/command-library");
-    File template = file.getFile();
+    File template = new File(templateFile);
 
     String parsedOutput = "";
 

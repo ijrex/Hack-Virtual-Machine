@@ -1,0 +1,5 @@
+@SP
+AM=M-1
+D=M
+@$V$_LABEL_$V$
+D;JNE
