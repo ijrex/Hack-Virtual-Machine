@@ -89,7 +89,7 @@ This package stores all memory locations/bases as constants and can be accessed 
 
 ### Template files 
 
-Template files used by the `commandlib.commands` class can be found outside of the main project in `/lib/command-library` and should be fetched using the `loadTemplateFile` util. Searches for template files is recursive; the directory structure inside of  `/lib/command-library` exists to aid the developer but is not required by `loadTemplateFile`. 
+Template files used by the `commandlib.commands` class are found in `/lib/command-library` and should be fetched using the `loadTemplateFile` util. 
 
 It should be noted that the Hack ASM (.asm) template files run on the Hack CPU emulator and therefore, can have their own unit tests.
 
@@ -165,11 +165,7 @@ M=D
 
 # Loading files
 
-The `loadfile` package contains two utility classes, `LoadFile` and `LoadFiles`. These packages are required to load the source Hack VM files as well as ASM template files.
-
-`LoadFile`: Search for, and load an individual file within the project folder or a specified directory. File extention type may also be set. 
-
-`LoadFiles`: Load all files of a specific type within a specified directory.
+The `loadfiles` package contains a utility class for importing files of a specific type within a given directory.
 
 # Tests
 
