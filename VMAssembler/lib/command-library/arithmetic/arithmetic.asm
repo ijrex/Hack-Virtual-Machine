@@ -1,0 +1,6 @@
+@$C$_END_OF_BLOCK_$C$
+D=A
+@R14
+M=D
+@$_ARITHMETIC_LIB_$
+0;JMP
