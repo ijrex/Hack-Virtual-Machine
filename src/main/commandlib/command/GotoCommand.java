@@ -10,8 +10,8 @@ public class GotoCommand extends Command {
   public GotoCommand(String[] argVars, Boolean _isClassDept) {
     super(argVars, _isClassDept);
 
-    goTo = Util.loadTemplateFile("./lib/command-library/goto/goto.asm");
-    ifGoTo = Util.loadTemplateFile("./lib/command-library/goto/if-goto.asm");
+    goTo = Util.loadTemplateFile("../lib/command-library/goto/goto.asm");
+    ifGoTo = Util.loadTemplateFile("../lib/command-library/goto/if-goto.asm");
   }
 
   public String[] write(String[] args, int linePos, String className) {

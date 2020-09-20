@@ -16,9 +16,9 @@ public class CommandLib {
   }
 
   private void assignCommandDescriptions() {
-    commands.put("bootstrap", new TemplateCommand("./lib/command-library/sys/bootstrap.asm"));
+    commands.put("bootstrap", new TemplateCommand("../lib/command-library/sys/bootstrap.asm"));
 
-    commands.put("lib_arithmetic", new TemplateCommand("./lib/command-library/arithmetic/lib_arithmetic.asm"));
+    commands.put("lib_arithmetic", new TemplateCommand("../lib/command-library/arithmetic/lib_arithmetic.asm"));
 
     commands.put("push", new PushCommand(new String[] { "push", "LOCATION", "VALUE" }, true));
     commands.put("pop", new PopCommand(new String[] { "pop", "LOCATION", "VALUE" }, true));

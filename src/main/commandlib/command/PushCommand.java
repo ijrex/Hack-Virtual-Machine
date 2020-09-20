@@ -12,10 +12,10 @@ public class PushCommand extends Command {
 
   public PushCommand(String[] argVars, Boolean _isClassDept) {
     super(argVars, _isClassDept);
-    pushConstant = Util.loadTemplateFile("./lib/command-library/push/push-constant.asm");
-    pushLocation = Util.loadTemplateFile("./lib/command-library/push/push-location.asm");
-    pushBase = Util.loadTemplateFile("./lib/command-library/push/push-base.asm");
-    pushStatic = Util.loadTemplateFile("./lib/command-library/push/push-static.asm");
+    pushConstant = Util.loadTemplateFile("../lib/command-library/push/push-constant.asm");
+    pushLocation = Util.loadTemplateFile("../lib/command-library/push/push-location.asm");
+    pushBase = Util.loadTemplateFile("../lib/command-library/push/push-base.asm");
+    pushStatic = Util.loadTemplateFile("../lib/command-library/push/push-static.asm");
   }
 
   public String[] write(String[] args, int linePos, String className) {
