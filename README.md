@@ -89,7 +89,7 @@ This package stores all memory locations/bases as constants and can be accessed 
 
 ### Template files 
 
-Template files used by the `commandlib.commands` class are found in `/lib/command-library` and should be fetched using the `loadTemplateFile` util. 
+Template files used by the `commandlib.commands` class are found in `src/lib/command-library` and should be fetched using the `loadTemplateFile` util. 
 
 It should be noted that the Hack ASM (.asm) template files run on the Hack CPU emulator and therefore, can have their own unit tests.
 
