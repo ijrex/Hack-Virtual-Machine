@@ -1,6 +1,3 @@
-@PROGRAM_START
-0;JMP
-
 // ADD
 (ARITHMETIC_ADD)
   @SP
@@ -118,4 +115,3 @@
   @R14
   A=M
   0;JMP
-(PROGRAM_START)

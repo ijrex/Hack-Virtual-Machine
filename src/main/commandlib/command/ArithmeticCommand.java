@@ -12,7 +12,7 @@ public class ArithmeticCommand extends Command {
   public String[] write(String[] args, int linePos) {
     String parsedOutput = output;
 
-    String regex = "\\$_ARITHMETIC_LIB_\\$";
+    String regex = "\\$L\\$_ARITHMETIC_LIB_\\$L\\$";
     parsedOutput = output.replaceAll(regex, "ARITHMETIC_" + name.toUpperCase());
 
     String[] parsedOutputArr = parsedOutput.split("\n");
