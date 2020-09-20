@@ -167,13 +167,6 @@ M=D
 
 The `loadfiles` package contains a utility class for importing files of a specific type within a given directory.
 
-
-# Running the Virtual Machine locally
-
-An executionable .jar is packaged in the /VMAssembler directory.
-
-! TODO: Compile the contents of the /lib folder so they are loaded as resources within the .jar file.
-
 # Tests
 
 Unit tests can be found in the `/tests` directory and run on the Nand2Tetris CPU Emulator https://www.nand2tetris.org/software.
