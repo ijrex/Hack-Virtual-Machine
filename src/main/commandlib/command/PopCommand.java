@@ -11,9 +11,9 @@ public class PopCommand extends Command {
 
   public PopCommand(String[] argVars, Boolean _isClassDept) {
     super(argVars, _isClassDept);
-    popLocation = Util.loadTemplateFile("./lib/command-library/pop/pop-location.asm");
-    popBase = Util.loadTemplateFile("./lib/command-library/pop/pop-base.asm");
-    popStatic = Util.loadTemplateFile("./lib/command-library/pop/pop-static.asm");
+    popLocation = Util.loadTemplateFile("../lib/command-library/pop/pop-location.asm");
+    popBase = Util.loadTemplateFile("../lib/command-library/pop/pop-base.asm");
+    popStatic = Util.loadTemplateFile("../lib/command-library/pop/pop-static.asm");
   }
 
   public String[] write(String[] args, int linePos, String className) {
