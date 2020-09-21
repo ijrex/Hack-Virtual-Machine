@@ -1,4 +1,4 @@
-# Hack Virtual Machine
+# Hack Virtual Machine: VM to ASM
 
 ## Parses one or more Hack Virtual Machine (.vm) files in a given directory and writes a single Hack Machine Assembly (.asm) file to the same location.
 
